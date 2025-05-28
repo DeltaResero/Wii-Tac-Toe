@@ -41,7 +41,6 @@ file(GLOB_RECURSE SRC_FILES
 file(GLOB_RECURSE BIN_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/audio/*.*"
   "${CMAKE_CURRENT_SOURCE_DIR}/gfx/*.png"
-  "${CMAKE_CURRENT_SOURCE_DIR}/languages/*.xml"
 )
 
 add_executable(Wii-Tac-Toe)

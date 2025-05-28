@@ -3,13 +3,27 @@
 #include "language.h"
 
 // Languages
-#include "english_xml.h"
-#include "french_xml.h"
-#include "german_xml.h"
-#include "dutch_xml.h"
-#include "spanish_xml.h"
-#include "italian_xml.h"
-#include "japanese_xml.h"
+constexpr char english_xml[] = {
+    #embed "../languages/english.xml"
+};
+constexpr char french_xml[] = {
+    #embed "../languages/french.xml"
+};
+constexpr char german_xml[] = {
+    #embed "../languages/german.xml"
+};
+constexpr char dutch_xml[] = {
+    #embed "../languages/dutch.xml"
+};
+constexpr char spanish_xml[] = {
+    #embed "../languages/spanish.xml"
+};
+constexpr char italian_xml[] = {
+    #embed "../languages/italian.xml"
+};
+constexpr char japanese_xml[] = {
+    #embed "../languages/japanese.xml"
+};
 
 /**
  * Constructor for the Language class.
@@ -88,30 +102,30 @@ void Language::SetLanguage(s32 Conf_Lang)
     switch(Conf_Lang)
     {
         case CONF_LANG_FRENCH:
-            Root_Node = mxmlLoadString(nullptr, reinterpret_cast<const char *>(french_xml), MXML_TEXT_CALLBACK);
+            Root_Node = mxmlLoadString(nullptr, french_xml, MXML_TEXT_CALLBACK);
             break;
         case CONF_LANG_GERMAN:
-            Root_Node = mxmlLoadString(nullptr, reinterpret_cast<const char *>(german_xml), MXML_TEXT_CALLBACK);
+            Root_Node = mxmlLoadString(nullptr, german_xml, MXML_TEXT_CALLBACK);
             break;
         case CONF_LANG_DUTCH:
-            Root_Node = mxmlLoadString(nullptr, reinterpret_cast<const char *>(dutch_xml), MXML_TEXT_CALLBACK);
+            Root_Node = mxmlLoadString(nullptr, dutch_xml, MXML_TEXT_CALLBACK);
             break;
         case CONF_LANG_SPANISH:
-            Root_Node = mxmlLoadString(nullptr, reinterpret_cast<const char *>(spanish_xml), MXML_TEXT_CALLBACK);
+            Root_Node = mxmlLoadString(nullptr, spanish_xml, MXML_TEXT_CALLBACK);
             break;
         case CONF_LANG_ITALIAN:
-            Root_Node = mxmlLoadString(nullptr, reinterpret_cast<const char *>(italian_xml), MXML_TEXT_CALLBACK);
+            Root_Node = mxmlLoadString(nullptr, italian_xml, MXML_TEXT_CALLBACK);
             break;
         case CONF_LANG_JAPANESE:
 #ifdef DEBUG
-            Root_Node = mxmlLoadString(nullptr, reinterpret_cast<const char *>(japanese_xml), MXML_TEXT_CALLBACK);
+            Root_Node = mxmlLoadString(nullptr, japanese_xml, MXML_TEXT_CALLBACK);
             break;
 #endif
         case CONF_LANG_KOREAN:
         case CONF_LANG_SIMP_CHINESE:
         case CONF_LANG_TRAD_CHINESE:
         default:    // CONF_LANG_ENGLISH
-            Root_Node = mxmlLoadString(nullptr, reinterpret_cast<const char *>(english_xml), MXML_TEXT_CALLBACK);
+            Root_Node = mxmlLoadString(nullptr, english_xml, MXML_TEXT_CALLBACK);
             break;
     }
     First_Node = mxmlFindElement(Root_Node, Root_Node, "language", nullptr, nullptr, MXML_DESCEND);
