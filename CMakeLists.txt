@@ -22,7 +22,7 @@ FetchContent_Declare(fmt
 )
 FetchContent_Declare(grrlib
   GIT_REPOSITORY https://github.com/GRRLIB/GRRLIB.git
-  GIT_TAG        aa61ecacc830deccf19ab91148ec9273a3d9f7a1
+  GIT_TAG        c3f2acfee7a4a93e35ade02408daa1508c9309f5
 )
 FetchContent_Declare(grrmod
   URL https://codeload.github.com/GRRLIB/GRRMOD/tar.gz/670f84601a5086c4d3eeb03bd3041e3c0a7f0ace
