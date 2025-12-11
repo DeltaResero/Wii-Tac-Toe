@@ -4,13 +4,19 @@
 #include "sound.h"
 #include "audio.h"
 
-// Audio files
-#include "button_rollover_raw.h"
-#include "screen_change_raw.h"
-#include "tic_tac_it.h"
+// Audio files using modern C++23 #embed
+constexpr u8 button_rollover_raw[] = {
+    #embed "../audio/button_rollover.raw"
+};
+constexpr u8 screen_change_raw[] = {
+    #embed "../audio/screen_change.raw"
+};
+constexpr char tic_tac_it[] = {
+    #embed "../audio/tic_tac.it"
+};
 
-static constexpr Sound ChangeSound(VOICE_MONO16, std::span{screen_change_raw, screen_change_raw_size}, 44100.0f);
-static constexpr Sound RollOverSound(VOICE_MONO16, std::span{button_rollover_raw, button_rollover_raw_size}, 44100.0f);
+static constexpr Sound ChangeSound(VOICE_MONO16, std::span{screen_change_raw, sizeof(screen_change_raw)}, 44100.0f);
+static constexpr Sound RollOverSound(VOICE_MONO16, std::span{button_rollover_raw, sizeof(button_rollover_raw)}, 44100.0f);
 
 /**
  * Constructor for the Audio class.
@@ -22,7 +28,7 @@ Audio::Audio() :
     AESND_Pause(false);
 
     GRRMOD_Init(true);
-    GRRMOD_SetMOD(tic_tac_it, tic_tac_it_size);
+    GRRMOD_SetMOD(tic_tac_it, sizeof(tic_tac_it)); // Using your .it file
 
     ScreenVoice = new Voice();
     ButtonVoice = new Voice();

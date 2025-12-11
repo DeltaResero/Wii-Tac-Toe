@@ -18,7 +18,7 @@
 ### Prerequisites
 
 * devkitPro
-  * devkitPPC
+  * devkitPPC (release 47 or later)
   * libogc
   * libfat
 * Port libs
@@ -37,9 +37,7 @@ To set up the devkitPro PowerPC devkitPPC toolchain and build system, follow the
 
 ```bash
 pacman --sync --needed --noconfirm ppc-mxml ppc-libpng ppc-freetype
-mkdir --parents build && cd build
-/opt/devkitpro/portlibs/wii/bin/powerpc-eabi-cmake ..
-cmake --build .
+cmake --workflow wii
 ```
 &nbsp;
 

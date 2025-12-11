@@ -18,31 +18,28 @@ pkg_check_modules(MXML REQUIRED mxml)
 
 include(FetchContent)
 FetchContent_Declare(fmt
-  URL https://github.com/fmtlib/fmt/archive/refs/tags/11.0.2.tar.gz
+  URL https://github.com/fmtlib/fmt/archive/refs/tags/11.2.0.tar.gz
 )
 FetchContent_Declare(grrlib
   GIT_REPOSITORY https://github.com/GRRLIB/GRRLIB.git
-  GIT_TAG        d93847e6a3e350bd1157d61cc1315d8bbff76968
+  GIT_TAG        c3f2acfee7a4a93e35ade02408daa1508c9309f5
 )
 FetchContent_Declare(grrmod
-  URL https://codeload.github.com/GRRLIB/GRRMOD/tar.gz/1ea0e8bb54eb9c2b052fba87d34530dca0365b97
-  SOURCE_SUBDIR "GRRMOD"
+  URL https://codeload.github.com/GRRLIB/GRRMOD/tar.gz/670f84601a5086c4d3eeb03bd3041e3c0a7f0ace
 )
+set(FMT_INSTALL OFF CACHE BOOL "Don't install" FORCE)
+set(GRRLIB_INSTALL OFF CACHE BOOL "Don't install" FORCE)
+set(GRRMOD_INSTALL OFF CACHE BOOL "Don't install" FORCE)
 set(GRRMOD_USE_MP3 OFF CACHE BOOL "Don't use MP3" FORCE)
 FetchContent_MakeAvailable(fmt grrlib grrmod)
 
 file(GLOB_RECURSE SRC_FILES
   "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp"
-  "${CMAKE_CURRENT_SOURCE_DIR}/source/*.c"
   "${CMAKE_CURRENT_SOURCE_DIR}/fonts/*.cpp"
-  "${grrlib_SOURCE_DIR}/GRRLIB/GRRLIB/*.c"
-  "${grrlib_SOURCE_DIR}/GRRLIB/lib/pngu/*.c"
 )
 
 file(GLOB_RECURSE BIN_FILES
-  "${CMAKE_CURRENT_SOURCE_DIR}/audio/*.*"
   "${CMAKE_CURRENT_SOURCE_DIR}/gfx/*.png"
-  "${CMAKE_CURRENT_SOURCE_DIR}/languages/*.xml"
 )
 
 add_executable(Wii-Tac-Toe)
@@ -64,11 +61,6 @@ target_sources(Wii-Tac-Toe PRIVATE
 
 target_include_directories(Wii-Tac-Toe PRIVATE
   "${CMAKE_CURRENT_SOURCE_DIR}/source"
-  "${grrlib_SOURCE_DIR}/GRRLIB/GRRLIB"
-  "${grrlib_SOURCE_DIR}/GRRLIB/lib/pngu"
-  ${PNG_INCLUDE_DIRS}
-  ${JPEG_INCLUDE_DIRS}
-  ${FREETYPE_INCLUDE_DIRS}
   ${MXML_INCLUDE_DIRS}
 )
 
@@ -79,6 +71,7 @@ dkp_add_embedded_binary_library(data
 target_link_libraries(Wii-Tac-Toe PRIVATE
   data
   fmt::fmt
+  grrlib
   grrmod
   ${PNG_LIBRARIES}
   ${FREETYPE_LIBRARIES}
@@ -88,3 +81,16 @@ target_link_libraries(Wii-Tac-Toe PRIVATE
 )
 
 ogc_create_dol(Wii-Tac-Toe)
+
+get_target_property(DOL_FILE Wii-Tac-Toe DKP_FILE)
+install(FILES "${DOL_FILE}" DESTINATION "Wii-Tac-Toe" RENAME "boot.dol")
+install(FILES
+  "${CMAKE_CURRENT_SOURCE_DIR}/Wii-Tac-Toe/icon.png"
+  "${CMAKE_CURRENT_SOURCE_DIR}/Wii-Tac-Toe/meta.xml"
+  DESTINATION "Wii-Tac-Toe"
+)
+
+set(CPACK_PACKAGE_NAME "wii-tac-toe")
+set(CPACK_GENERATOR "ZIP")
+set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}")
+include(CPack)
