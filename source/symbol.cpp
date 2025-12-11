@@ -1,14 +1,14 @@
 #include "symbol.h"
 
 // Fonts
-#include "symbols_png.h"
+#include "symbols.h"
 
 /**
  * Constructor for the Symbol class.
  */
 Symbol::Symbol() :
     Object(),
-    Img(Texture::CreateFromPNG(symbols_png))
+    Img(Texture::CreateFromPNG(symbols))
 {
     Width = 136;
     Height = 100;

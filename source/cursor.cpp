@@ -3,13 +3,13 @@
 #include <utility>
 
 // Graphics
-#include "hands_png.h"
+#include "hands.h"
 
 /**
  * Constructor for the Cursor class.
  */
 Cursor::Cursor() : Object(),
-    Cursors(std::unique_ptr<Texture>(Texture::CreateFromPNG(hands_png)))
+    Cursors(std::unique_ptr<Texture>(Texture::CreateFromPNG(hands)))
 {
     Width = 96;
     Height = 96;

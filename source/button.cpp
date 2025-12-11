@@ -2,11 +2,11 @@
 #include "button.h"
 
 // Graphics
-#include "button_on_png.h"
-#include "button_off_png.h"
-#include "home_button_png.h"
-#include "button_home_png.h"
-#include "button_select_png.h"
+#include "button_on.h"
+#include "button_off.h"
+#include "home_button.h"
+#include "button_home.h"
+#include "button_select.h"
 
 /**
  * Constructor for the Button class.
@@ -27,15 +27,15 @@ Button::Button(buttonType NewType) : Object(),
     switch(Type)
     {
         case buttonType::HomeMenu:
-            ButtonImgOff = std::unique_ptr<Texture>(Texture::CreateFromPNG(button_home_png));
+            ButtonImgOff = std::unique_ptr<Texture>(Texture::CreateFromPNG(button_home));
             break;
         case buttonType::Home:
-            ButtonImgOff = std::unique_ptr<Texture>(Texture::CreateFromPNG(home_button_png));
+            ButtonImgOff = std::unique_ptr<Texture>(Texture::CreateFromPNG(home_button));
             break;
         default:
-            ButtonImgOn = std::unique_ptr<Texture>(Texture::CreateFromPNG(button_on_png));
-            ButtonImgOff = std::unique_ptr<Texture>(Texture::CreateFromPNG(button_off_png));
-            ButtonSelected = std::unique_ptr<Texture>(Texture::CreateFromPNG(button_select_png));
+            ButtonImgOn = std::unique_ptr<Texture>(Texture::CreateFromPNG(button_on));
+            ButtonImgOff = std::unique_ptr<Texture>(Texture::CreateFromPNG(button_off));
+            ButtonSelected = std::unique_ptr<Texture>(Texture::CreateFromPNG(button_select));
     }
 
     Width = ButtonImgOff->GetWidth();

@@ -21,11 +21,11 @@
 #include "game.h"
 
 // Graphics
-#include "splash_png.h"
-#include "splash_arm_png.h"
-#include "backg_png.h"
-#include "backg_hover_png.h"
-#include "hover_png.h"
+#include "splash.h"
+#include "splash_arm.h"
+#include "backg.h"
+#include "backg_hover.h"
+#include "hover.h"
 
 // Font
 #include "../fonts/Swis721_Ex_BT.h"
@@ -121,11 +121,11 @@ Game::Game(u16 GameScreenWidth, u16 GameScreenHeight) :
     WTTPlayer[1].SetName(Lang->String("PLAYER 2"));
 
     // Load textures
-    GameImg = Texture::CreateFromPNG(backg_png);
-    GameHoverImg = Texture::CreateFromPNG(backg_hover_png);
-    SplashImg = Texture::CreateFromPNG(splash_png);
-    SplashArmImg = Texture::CreateFromPNG(splash_arm_png);
-    HoverImg = Texture::CreateFromPNG(hover_png);
+    GameImg = Texture::CreateFromPNG(backg);
+    GameHoverImg = Texture::CreateFromPNG(backg_hover);
+    SplashImg = Texture::CreateFromPNG(splash);
+    SplashArmImg = Texture::CreateFromPNG(splash_arm);
+    HoverImg = Texture::CreateFromPNG(hover);
     CopiedImg = std::make_unique<Texture>(ScreenWidth, ScreenHeight);
     GameText = std::make_unique<Texture>(ScreenWidth, ScreenHeight);
 
