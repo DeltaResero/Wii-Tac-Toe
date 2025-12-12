@@ -12,8 +12,8 @@
 #ifndef AudioH
 #define AudioH
 //---------------------------------------------------------------------------
-// Forward declarations
-class Voice;
+#include <optional>
+#include "voice.h"
 
 /**
  * This is a class used for the game audio.
@@ -33,8 +33,8 @@ public:
     void PlaySoundButton(u16 Volume);
 private:
     bool Paused;
-    Voice *ScreenVoice;
-    Voice *ButtonVoice;
+    std::optional<Voice> ScreenVoice;
+    std::optional<Voice> ButtonVoice;
 };
 //---------------------------------------------------------------------------
 #endif

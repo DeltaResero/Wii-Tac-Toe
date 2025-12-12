@@ -41,8 +41,9 @@ Audio::Audio() :
     GRRMOD_Init(true);
     GRRMOD_SetMOD(tic_tac_it, sizeof(tic_tac_it)); // Using your .it file
 
-    ScreenVoice = new Voice();
-    ButtonVoice = new Voice();
+    // Construct the Voice objects after AESND_Init has been called.
+    ScreenVoice.emplace();
+    ButtonVoice.emplace();
 }
 
 /**
@@ -50,12 +51,13 @@ Audio::Audio() :
  */
 Audio::~Audio()
 {
+    // Explicitly destroy Voice objects before AESND is shut down.
+    ScreenVoice.reset();
+    ButtonVoice.reset();
+
     GRRMOD_Unload();
     GRRMOD_End();
     AESND_Pause(true);
-
-    delete ScreenVoice;
-    delete ButtonVoice;
 }
 
 /**
