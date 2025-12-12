@@ -106,7 +106,7 @@ private:
     bool Copied;
 
     std::array<std::unique_ptr<Button>, 3> ExitButton;
-    std::array<Button *, 3> MenuButton;
+    std::array<std::unique_ptr<Button>, 3> MenuButton;
     Grid *GameGrid;
     Language *Lang;
     std::array<std::array<Symbol, 3>, 3> GridSign;

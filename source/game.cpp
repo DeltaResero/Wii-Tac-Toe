@@ -113,19 +113,19 @@ Game::Game(u16 GameScreenWidth, u16 GameScreenHeight) :
     ExitButton[2]->SetTop(165);
     ExitButton[2]->SetCaption(Lang->String("Return to Loader"));
 
-    MenuButton[0] = new Button();
+    MenuButton[0] = std::make_unique<Button>();
     MenuButton[0]->SetFont(DefaultFont);
     MenuButton[0]->SetLeft((ScreenWidth / 2.0f) - (MenuButton[0]->GetWidth() / 2.0f));
     MenuButton[0]->SetTop(92);
     MenuButton[0]->SetCaption(Lang->String("2 Players (1 Wiimote)"));
 
-    MenuButton[1] = new Button();
+    MenuButton[1] = std::make_unique<Button>();
     MenuButton[1]->SetFont(DefaultFont);
     MenuButton[1]->SetLeft((ScreenWidth / 2.0f) - (MenuButton[1]->GetWidth() / 2.0f));
     MenuButton[1]->SetTop(292);
     MenuButton[1]->SetCaption(Lang->String("1 Player (Vs AI)"));
 
-    MenuButton[2] = new Button();
+    MenuButton[2] = std::make_unique<Button>();
     MenuButton[2]->SetFont(DefaultFont);
     MenuButton[2]->SetLeft((ScreenWidth / 2.0f) - (MenuButton[2]->GetWidth() / 2.0f));
     MenuButton[2]->SetTop(192);
@@ -185,12 +185,6 @@ Game::~Game()
 
     delete GameGrid;
     delete Lang;
-
-    // Clean up buttons
-    for(auto& button : MenuButton)
-    {
-        delete button;
-    }
 
     delete GameAudio;
 }
