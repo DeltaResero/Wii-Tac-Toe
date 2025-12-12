@@ -110,7 +110,7 @@ private:
     std::unique_ptr<Grid> GameGrid;
     std::unique_ptr<Language> Lang;
     std::array<std::array<Symbol, 3>, 3> GridSign;
-    Audio *GameAudio;
+    std::unique_ptr<Audio> GameAudio;
 
     std::unique_ptr<Texture> GameImg; /**< Background texture for the game. */
     std::unique_ptr<Texture> GameHoverImg; /**< Hover texture for the game buttons. */

@@ -171,7 +171,7 @@ Game::Game(u16 GameScreenWidth, u16 GameScreenHeight) :
     SplashArmImg->SetHandle(8, 70);
 
     // Initialize Audio and Rumble
-    GameAudio = new Audio();
+    GameAudio = std::make_unique<Audio>();
     RUMBLE_Init();
     NewGame();
 }
@@ -182,8 +182,6 @@ Game::Game(u16 GameScreenWidth, u16 GameScreenHeight) :
 Game::~Game()
 {
     GRRLIB_FreeTTF(DefaultFont);
-
-    delete GameAudio;
 }
 
 /**
