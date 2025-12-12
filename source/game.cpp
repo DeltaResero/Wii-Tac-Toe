@@ -13,15 +13,15 @@
 #include <cstdio>
 #include <cstdlib>
 #include <ctime>
+#include <chrono>
 #include <charconv>
 #include <limits>
+#include <format>
 #include <wiiuse/wpad.h>
 #include <ogc/conf.h>
 #include <ogc/lwp_watchdog.h>
 #include "grrlib.h"
 #include "grrlib_class.h"
-#include "fmt/format.h"
-#include "fmt/chrono.h"
 #include "tools.h"
 #include "grid.h"
 #include "audio.h"
@@ -157,10 +157,10 @@ Game::Game(u16 GameScreenWidth, u16 GameScreenHeight) :
     // Build Start Screen background
     SplashImg->Draw(0, 0);
     GRRLIB_PrintfTTF(50, 310, DefaultFont,
-        fmt::format(fmt::runtime(Lang->String("Programmer: {}")), "Crayon").c_str(),
+        std::format(std::runtime_format(Lang->String("Programmer: {}")), "Crayon").c_str(),
         11, 0xFFFFFFFF);
     GRRLIB_PrintfTTF(50, 330, DefaultFont,
-        fmt::format(fmt::runtime(Lang->String("Graphics: {}")), "Mr_Nick666").c_str(),
+        std::format(std::runtime_format(Lang->String("Graphics: {}")), "Mr_Nick666").c_str(),
         11, 0xFFFFFFFF);
     text = Lang->String("Press The A Button");
     GRRLIB_PrintfTTF((ScreenWidth / 2) - (GRRLIB_WidthTTF(DefaultFont, text.c_str(), 20) / 2),
@@ -248,7 +248,7 @@ void Game::Paint()
     if(ShowFPS)
     {
         CalculateFrameRate();
-        const auto strFPS = fmt::format("FPS: {}", FPS);
+        const auto strFPS = std::format("FPS: {}", FPS);
         GRRLIB_PrintfTTF(15, 445, DefaultFont, strFPS.c_str(), 17, 0x000000FF);
         GRRLIB_PrintfTTF(14, 444, DefaultFont, strFPS.c_str(), 17, 0xFFFFFFFF);
         GRRLIB_PrintfTTF(16, 446, DefaultFont, strFPS.c_str(), 17, 0x808080FF);
@@ -485,7 +485,7 @@ void Game::MenuScreen(bool CopyScreen)
         Rectangle(0, 385, ScreenWidth, 95, 0x000000FF, 1);
 
         GRRLIB_PrintfTTF(500, 40, DefaultFont,
-            fmt::format(fmt::runtime(Lang->String("Ver. {}")), "1.1.0").c_str(),
+            std::format(std::runtime_format(Lang->String("Ver. {}")), "1.1.0").c_str(),
             12, 0xFFFFFFFF);
 
         if(CopyScreen)
@@ -693,8 +693,8 @@ bool Game::ControllerManager()
         WPAD_Rumble(WPAD_CHAN_ALL, 1); // Rumble on
         WIILIGHT_TurnOn();
 
-        const std::time_t now = std::time(nullptr);
-        const auto path = fmt::format("sd:/Screenshot {:%F %H%M%S}.png", *std::localtime(&now));
+        const auto now = std::chrono::time_point_cast<std::chrono::seconds>(std::chrono::system_clock::now());
+        const auto path = std::format("sd:/Screenshot {:%F %H%M%S}.png", now);
 
         text = (ScreenShot(path)) ? "A screenshot was taken!!!" : "Screenshot did not work!!!";
 
@@ -720,7 +720,7 @@ void Game::Clear()
     GameGrid->Clear();
     CurrentPlayer = PlayerToStart;
     PlayerToStart = !PlayerToStart; // Next other player will start
-    text = fmt::format(fmt::runtime(Lang->GetTurnOverMessage()), WTTPlayer[CurrentPlayer].GetName());
+    text = std::format(std::runtime_format(Lang->GetTurnOverMessage()), WTTPlayer[CurrentPlayer].GetName());
     RoundFinished = false;
     Copied = false;
     ChangeCursor();
@@ -736,7 +736,7 @@ void Game::TurnIsOver()
     {   // A winner is declare
         GameWinner = (GameWinner == WTTPlayer[0].GetSign()) ? 0 : 1;
         WTTPlayer[GameWinner].IncScore();
-        text = fmt::format(fmt::runtime(Lang->GetWinningMessage()),
+        text = std::format(std::runtime_format(Lang->GetWinningMessage()),
             WTTPlayer[GameWinner].GetName(), WTTPlayer[!GameWinner].GetName());
         RoundFinished = true;
         SymbolAlpha = 5;
@@ -751,7 +751,7 @@ void Game::TurnIsOver()
     else
     {
         CurrentPlayer = !CurrentPlayer; // Change player's turn
-        text = fmt::format(fmt::runtime(Lang->GetTurnOverMessage()), WTTPlayer[CurrentPlayer].GetName());
+        text = std::format(std::runtime_format(Lang->GetTurnOverMessage()), WTTPlayer[CurrentPlayer].GetName());
     }
 
     Copied = false;

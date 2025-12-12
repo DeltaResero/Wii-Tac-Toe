@@ -16,12 +16,6 @@ set(CMAKE_INSTALL_LIBDIR "lib" CACHE PATH "Library directory name")
 # --- Dependencies (FetchContent) ---
 include(FetchContent)
 
-# fmt
-FetchContent_Declare(fmt
-  URL https://github.com/fmtlib/fmt/archive/refs/tags/11.2.0.tar.gz
-)
-set(FMT_INSTALL OFF CACHE BOOL "" FORCE)
-
 # GRRLIB
 FetchContent_Declare(grrlib
   GIT_REPOSITORY https://github.com/GRRLIB/GRRLIB.git
@@ -36,7 +30,7 @@ FetchContent_Declare(grrmod
 set(GRRMOD_INSTALL OFF CACHE BOOL "" FORCE)
 set(GRRMOD_USE_MP3 OFF CACHE BOOL "" FORCE)
 
-FetchContent_MakeAvailable(fmt grrlib grrmod)
+FetchContent_MakeAvailable(grrlib grrmod)
 
 # --- System Libraries (with better error checking) ---
 find_package(PkgConfig REQUIRED)
@@ -92,7 +86,7 @@ add_executable(Wii-Tac-Toe
     ${GENERATED_SOURCES}
 )
 
-target_compile_features(Wii-Tac-Toe PRIVATE cxx_std_23)
+target_compile_features(Wii-Tac-Toe PRIVATE cxx_std_26)
 
 target_compile_options(Wii-Tac-Toe PRIVATE
   -Werror -Wall -Wunused -Wmisleading-indentation 
@@ -105,7 +99,6 @@ target_include_directories(Wii-Tac-Toe PRIVATE
 )
 
 target_link_libraries(Wii-Tac-Toe PRIVATE
-  fmt::fmt
   grrlib
   grrmod
   PkgConfig::PNG
