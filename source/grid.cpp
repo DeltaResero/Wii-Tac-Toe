@@ -27,13 +27,6 @@ Grid::Grid() :
 }
 
 /**
- * Destructor for the Grid class.
- */
-Grid::~Grid()
-{
-}
-
-/**
  * Set player at a certain position.
  * @param[in] Player Player sign, either X or O.
  * @param[in] X X coordinate in the grid.

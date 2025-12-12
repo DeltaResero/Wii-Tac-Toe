@@ -25,7 +25,10 @@ class Grid
 public:
     Grid();
     Grid(Grid const&) = delete;
-    ~Grid();
+    /**
+     * Destructor for the Grid class.
+     */
+    virtual ~Grid() = default;
     Grid& operator=(Grid const&) = delete;
     bool SetPlayer(u8 Player, u8 X, u8 Y);
     void SetPlayerAI(u8 Player);

@@ -23,7 +23,6 @@
 #include "tools.h"
 #include "grid.h"
 #include "audio.h"
-#include "symbol.h"
 #include "button.h"
 #include "cursor.h"
 #include "player.h"
@@ -97,31 +96,31 @@ Game::Game(u16 GameScreenWidth, u16 GameScreenHeight) :
 
     ExitButton[1] = std::make_unique<Button>(buttonType::HomeMenu);
     ExitButton[1]->SetFont(DefaultFont);
-    ExitButton[1]->SetLeft((ScreenWidth / 2) + 20);
+    ExitButton[1]->SetLeft((ScreenWidth / 2.0f) + 20.0f);
     ExitButton[1]->SetTop(165);
     ExitButton[1]->SetCaption(Lang->String("Reset"));
 
     ExitButton[2] = std::make_unique<Button>(buttonType::HomeMenu);
     ExitButton[2]->SetFont(DefaultFont);
-    ExitButton[2]->SetLeft((ScreenWidth / 2) - ExitButton[1]->GetWidth() - 20);
+    ExitButton[2]->SetLeft((ScreenWidth / 2.0f) - ExitButton[1]->GetWidth() - 20.0f);
     ExitButton[2]->SetTop(165);
     ExitButton[2]->SetCaption(Lang->String("Return to Loader"));
 
     MenuButton[0] = new Button();
     MenuButton[0]->SetFont(DefaultFont);
-    MenuButton[0]->SetLeft((ScreenWidth / 2) - (MenuButton[0]->GetWidth() / 2));
+    MenuButton[0]->SetLeft((ScreenWidth / 2.0f) - (MenuButton[0]->GetWidth() / 2.0f));
     MenuButton[0]->SetTop(92);
     MenuButton[0]->SetCaption(Lang->String("2 Players (1 Wiimote)"));
 
     MenuButton[1] = new Button();
     MenuButton[1]->SetFont(DefaultFont);
-    MenuButton[1]->SetLeft((ScreenWidth / 2) - (MenuButton[1]->GetWidth() / 2));
+    MenuButton[1]->SetLeft((ScreenWidth / 2.0f) - (MenuButton[1]->GetWidth() / 2.0f));
     MenuButton[1]->SetTop(292);
     MenuButton[1]->SetCaption(Lang->String("1 Player (Vs AI)"));
 
     MenuButton[2] = new Button();
     MenuButton[2]->SetFont(DefaultFont);
-    MenuButton[2]->SetLeft((ScreenWidth / 2) - (MenuButton[2]->GetWidth() / 2));
+    MenuButton[2]->SetLeft((ScreenWidth / 2.0f) - (MenuButton[2]->GetWidth() / 2.0f));
     MenuButton[2]->SetTop(192);
     MenuButton[2]->SetCaption(Lang->String("2 Players (2 Wiimotes)"));
 
