@@ -13,6 +13,8 @@
 #include <cstdio>
 #include <cstdlib>
 #include <ctime>
+#include <charconv>
+#include <limits>
 #include <wiiuse/wpad.h>
 #include <ogc/conf.h>
 #include <ogc/lwp_watchdog.h>
@@ -47,6 +49,11 @@ static constexpr Point Table[3][3] = {
     {Point(180, 28), Point(180, 131), Point(180, 233)},
     {Point(322, 28), Point(322, 131), Point(322, 233)},
     {Point(464, 28), Point(464, 131), Point(464, 233)}};
+
+/**
+ * Maximum digits + null terminator.
+ */
+static constexpr size_t MaxScoreLength = std::numeric_limits<u16>::digits10 + 2;
 
 /**
  * Constructor for the Game class.
@@ -292,20 +299,22 @@ void Game::GameScreen(bool CopyScreen)
         // Function to draw the score with a shadow
         auto DrawScore = [&](int playerIndex, int yPos, u32 color)
         {
-            const auto ScoreText = fmt::format_int(WTTPlayer[playerIndex].GetScore());
-            const auto TextLeft = 104 - GRRLIB_WidthTTF(DefaultFont, ScoreText.c_str(), 35) / 2;
-            GRRLIB_PrintfTTF(TextLeft, yPos + 2, DefaultFont, ScoreText.c_str(), 35, 0xFFFFFFFF);
-            GRRLIB_PrintfTTF(TextLeft - 2, yPos, DefaultFont, ScoreText.c_str(), 35, color);
+            char ScoreText[MaxScoreLength] = {};
+            std::to_chars(ScoreText, ScoreText + MaxScoreLength, WTTPlayer[playerIndex].GetScore());
+            const auto TextLeft = 104 - GRRLIB_WidthTTF(DefaultFont, ScoreText, 35) / 2;
+            GRRLIB_PrintfTTF(TextLeft, yPos + 2, DefaultFont, ScoreText, 35, 0xFFFFFFFF);
+            GRRLIB_PrintfTTF(TextLeft - 2, yPos, DefaultFont, ScoreText, 35, color);
         };
 
         DrawScore(0, 75, 0x6BB6DEFF); // Player 1
         DrawScore(1, 175, 0xE6313AFF); // Player 2
 
         // Draw tie score
-        const auto TieScoreText = fmt::format_int(TieGame);
-        const auto TieTextLeft = 104 - GRRLIB_WidthTTF(DefaultFont, TieScoreText.c_str(), 35) / 2;
-        GRRLIB_PrintfTTF(TieTextLeft, 282, DefaultFont, TieScoreText.c_str(), 35, 0x109642FF);
-        GRRLIB_PrintfTTF(TieTextLeft - 2, 280, DefaultFont, TieScoreText.c_str(), 35, 0xFFFFFFFF);
+        char TieScoreText[MaxScoreLength] = {};
+        std::to_chars(TieScoreText, TieScoreText + MaxScoreLength, TieGame);
+        const auto TieTextLeft = 104 - GRRLIB_WidthTTF(DefaultFont, TieScoreText, 35) / 2;
+        GRRLIB_PrintfTTF(TieTextLeft, 282, DefaultFont, TieScoreText, 35, 0x109642FF);
+        GRRLIB_PrintfTTF(TieTextLeft - 2, 280, DefaultFont, TieScoreText, 35, 0xFFFFFFFF);
 
         // Draw text at the bottom with a shadow offset of 1, 1
         PrintWrapText(130, 420, 390, text, 15, 0x8C8A8CFF, 0x111111FF, 1, 1);

@@ -60,7 +60,7 @@ u8 Player::GetSign() const
  * Get the player score.
  * @return Player score.
  */
-unsigned int Player::GetScore() const
+u16 Player::GetScore() const
 {
     return Score;
 }

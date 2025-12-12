@@ -42,7 +42,7 @@ public:
     void SetSign(u8 ASign);
     [[nodiscard]] u8 GetSign() const;
 
-    [[nodiscard]] unsigned int GetScore() const;
+    [[nodiscard]] u16 GetScore() const;
 
     void IncScore();
     void ResetScore();
@@ -51,7 +51,7 @@ public:
     [[nodiscard]] playerType GetType() const;
 
 private:
-    unsigned int Score;
+    u16 Score;
     std::string Name;
     u8 Sign;
     playerType Type;
