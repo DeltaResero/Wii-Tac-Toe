@@ -24,15 +24,6 @@
  * @param[in] NewType Button type.
  */
 Button::Button(buttonType NewType) : Object(),
-    Focused(false),
-    Selected(false),
-    Caption(""),
-    Font(nullptr),
-    TextWidth(100), // random value
-    TextHeight(14),
-    TextTop(0),
-    TextLeft(0),
-    TextColor(0x000000FF),
     Type(NewType)
 {
     switch(Type)

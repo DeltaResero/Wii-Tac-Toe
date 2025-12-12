@@ -12,20 +12,6 @@
 #include "object.h"
 
 /**
- * Constructor for the Object class.
- */
-Object::Object() :
-    Left(0),
-    Top(0),
-    Width(0),
-    Height(0),
-    Angle(0.0),
-    Visible(true),
-    Color(0xFFFFFFFF)
-{
-}
-
-/**
  * Get the left position of the object.
  * @see SetLeft()
  * @return Left position in pixel.

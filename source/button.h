@@ -34,7 +34,7 @@ enum class buttonType : u8 {
 class Button : public Object
 {
 public:
-    Button(buttonType = buttonType::StdMenu);
+    Button(buttonType NewType = buttonType::StdMenu);
     Button(Button const&) = delete;
     ~Button() = default;
     Button& operator=(Button const&) = delete;
@@ -46,16 +46,16 @@ public:
     void SetTextColor(u32 NewColor);
     void SetTextHeight(unsigned int NewHeight);
 private:
-    bool Focused;
-    bool Selected;
-    std::string Caption;
-    GRRLIB_ttfFont *Font;
-    unsigned int TextWidth;
-    unsigned int TextHeight;
-    unsigned int TextTop;
-    unsigned int TextLeft;
-    u32 TextColor;
-    buttonType Type;
+    bool Focused{false};
+    bool Selected{false};
+    std::string Caption{};
+    GRRLIB_ttfFont *Font{nullptr};
+    unsigned int TextWidth{100}; // random default value
+    unsigned int TextHeight{14};
+    unsigned int TextTop{0};
+    unsigned int TextLeft{0};
+    u32 TextColor{0x000000FF};
+    buttonType Type{buttonType::StdMenu};
     std::unique_ptr<Texture> ButtonImgOn;
     std::unique_ptr<Texture> ButtonImgOff;
     std::unique_ptr<Texture> ButtonSelected;

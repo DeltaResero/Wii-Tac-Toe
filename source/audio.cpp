@@ -32,8 +32,7 @@ static constexpr Sound RollOverSound(VOICE_MONO16, std::span{button_rollover_raw
 /**
  * Constructor for the Audio class.
  */
-Audio::Audio() :
-    Paused(false)
+Audio::Audio()
 {
     AESND_Init();
     AESND_Pause(false);

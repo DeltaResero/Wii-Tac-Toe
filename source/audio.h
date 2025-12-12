@@ -32,9 +32,9 @@ public:
     void PlaySoundScreenChange(u16 Volume);
     void PlaySoundButton(u16 Volume);
 private:
-    bool Paused;
-    std::optional<Voice> ScreenVoice;
-    std::optional<Voice> ButtonVoice;
+    bool Paused{false};
+    std::optional<Voice> ScreenVoice; // These are initialized in the .cpp
+    std::optional<Voice> ButtonVoice; // and do not need a default here.
 };
 //---------------------------------------------------------------------------
 #endif

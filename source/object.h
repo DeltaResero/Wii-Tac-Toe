@@ -22,7 +22,10 @@
 class Object
 {
 public:
-    Object();
+    /**
+     * Constructor for the Object class.
+     */
+    Object() = default;
     Object(Object const&) = delete;
     virtual ~Object() = default;
     Object& operator=(Object const&) = delete;
@@ -51,13 +54,13 @@ public:
 protected:
     virtual void Paint() = 0; /**< Draw an image on screen. */
 
-    float Left;         /**< Specifies the x-coordinate of the upper-left corner of the object. */
-    float Top;          /**< Specifies the y-coordinate of the upper-left corner of the object. */
-    unsigned int Width; /**< The width of the object. */
-    unsigned int Height;/**< The height of the object. */
-    float Angle;        /**< The angle in degree of the object. */
-    bool Visible;       /**< Control the visibility of the object. If Visible is true, the object appears. If Visible is false, the object is not visible. */
-    u32 Color;          /**< Color of the object (RGBA). */
+    float Left{0.0f};       /**< Specifies the x-coordinate of the upper-left corner of the object. */
+    float Top{0.0f};        /**< Specifies the y-coordinate of the upper-left corner of the object. */
+    unsigned int Width{0};  /**< The width of the object. */
+    unsigned int Height{0}; /**< The height of the object. */
+    float Angle{0.0f};      /**< The angle in degree of the object. */
+    bool Visible{true};     /**< Control the visibility of the object. If Visible is true, the object appears. If Visible is false, the object is not visible. */
+    u32 Color{0xFFFFFFFF};  /**< Color of the object (RGBA). */
     //char *Name;
     //void *Parent;
 };

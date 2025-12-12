@@ -12,15 +12,6 @@
 #include "player.h"
 
 /**
- * Constructor for the Player class.
- */
-Player::Player() :
-    Score(0),
-    Type(playerType::Human)
-{
-}
-
-/**
  * Set the player name.
  * @param[in] AName Give a name to the player.
  */
