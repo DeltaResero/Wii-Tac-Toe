@@ -74,7 +74,7 @@ Game::Game(u16 GameScreenWidth, u16 GameScreenHeight) :
     std::srand(std::time(nullptr));  // Initialize random seed
 
     GameGrid = std::make_unique<Grid>();
-    Lang = new Language();
+    Lang = std::make_unique<Language>();
 
     DefaultFont = GRRLIB_LoadTTF(Swis721_Ex_BT, Swis721_Ex_BT_size);
 
@@ -182,8 +182,6 @@ Game::Game(u16 GameScreenWidth, u16 GameScreenHeight) :
 Game::~Game()
 {
     GRRLIB_FreeTTF(DefaultFont);
-
-    delete Lang;
 
     delete GameAudio;
 }
