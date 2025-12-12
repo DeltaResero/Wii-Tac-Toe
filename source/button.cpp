@@ -31,16 +31,16 @@ Button::Button(buttonType NewType) : Object(),
         case buttonType::HomeMenu:
             // For HomeMenu buttons, the "On" texture is the same as the "Off" texture,
             // which is then tinted by the Paint() function.
-            ButtonImgOn = std::unique_ptr<Texture>(Texture::CreateFromPNG(button_home));
-            ButtonImgOff = std::unique_ptr<Texture>(Texture::CreateFromPNG(button_home));
+            ButtonImgOn = Texture::CreateFromPNG(button_home);
+            ButtonImgOff = Texture::CreateFromPNG(button_home);
             break;
         case buttonType::Home:
-            ButtonImgOff = std::unique_ptr<Texture>(Texture::CreateFromPNG(home_button));
+            ButtonImgOff = Texture::CreateFromPNG(home_button);
             break;
         default:
-            ButtonImgOn = std::unique_ptr<Texture>(Texture::CreateFromPNG(button_on));
-            ButtonImgOff = std::unique_ptr<Texture>(Texture::CreateFromPNG(button_off));
-            ButtonSelected = std::unique_ptr<Texture>(Texture::CreateFromPNG(button_select));
+            ButtonImgOn = Texture::CreateFromPNG(button_on);
+            ButtonImgOff = Texture::CreateFromPNG(button_off);
+            ButtonSelected = Texture::CreateFromPNG(button_select);
     }
 
     Width = ButtonImgOff->GetWidth();
