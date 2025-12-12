@@ -38,6 +38,9 @@ Button::Button(buttonType NewType) : Object(),
     switch(Type)
     {
         case buttonType::HomeMenu:
+            // For HomeMenu buttons, the "On" texture is the same as the "Off" texture,
+            // which is then tinted by the Paint() function.
+            ButtonImgOn = std::unique_ptr<Texture>(Texture::CreateFromPNG(button_home));
             ButtonImgOff = std::unique_ptr<Texture>(Texture::CreateFromPNG(button_home));
             break;
         case buttonType::Home:
@@ -65,7 +68,7 @@ void Button::Paint()
     ButtonImgOff->Draw(Left, Top, 0, 1.0f, 1.0f, 0xFFFFFFFF);
     GRRLIB_PrintfTTF(TextLeft, TextTop, Font, Caption.c_str(), TextHeight, TextColor);
 
-    if(Focused)
+    if(Focused && ButtonImgOn)
     {
         u32 HoverColor = (Type == buttonType::HomeMenu) ? 0x0000FF33 : 0xFFFFFFFF;
         ButtonImgOn->Draw(Left, Top, 0, 1.0f, 1.0f, HoverColor);

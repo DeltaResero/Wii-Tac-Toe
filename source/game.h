@@ -105,7 +105,7 @@ private:
     u8 AIThinkLoop;
     bool Copied;
 
-    std::array<Button *, 3> ExitButton;
+    std::array<std::unique_ptr<Button>, 3> ExitButton;
     std::array<Button *, 3> MenuButton;
     Grid *GameGrid;
     Language *Lang;

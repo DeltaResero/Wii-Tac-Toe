@@ -88,20 +88,20 @@ Game::Game(u16 GameScreenWidth, u16 GameScreenHeight) :
     }
 
     // Initialize Exit and Menu buttons
-    ExitButton[0] = new Button(buttonType::Home);
+    ExitButton[0] = std::make_unique<Button>(buttonType::Home);
     ExitButton[0]->SetFont(DefaultFont);
     ExitButton[0]->SetLeft(430);
     ExitButton[0]->SetTop(20);
     ExitButton[0]->SetTextHeight(20);
     ExitButton[0]->SetCaption(Lang->String("Close"));
 
-    ExitButton[1] = new Button(buttonType::HomeMenu);
+    ExitButton[1] = std::make_unique<Button>(buttonType::HomeMenu);
     ExitButton[1]->SetFont(DefaultFont);
     ExitButton[1]->SetLeft((ScreenWidth / 2) + 20);
     ExitButton[1]->SetTop(165);
     ExitButton[1]->SetCaption(Lang->String("Reset"));
 
-    ExitButton[2] = new Button(buttonType::HomeMenu);
+    ExitButton[2] = std::make_unique<Button>(buttonType::HomeMenu);
     ExitButton[2]->SetFont(DefaultFont);
     ExitButton[2]->SetLeft((ScreenWidth / 2) - ExitButton[1]->GetWidth() - 20);
     ExitButton[2]->SetTop(165);
@@ -181,10 +181,6 @@ Game::~Game()
     delete Lang;
 
     // Clean up buttons
-    for(auto& button : ExitButton)
-    {
-        delete button;
-    }
     for(auto& button : MenuButton)
     {
         delete button;
