@@ -1,7 +1,13 @@
-/**
- * @file cursor.h
- * Contains the Cursor class.
- */
+// source/cursor.h
+// SPDX-License-Identifier: MIT
+//
+// Wii-Tac-Toe
+//
+// Copyright (C) 2025 Crayon
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the MIT License. A copy of the license is
+// located in the LICENSE file included with this distribution.
 
 #ifndef CursorH
 #define CursorH
@@ -43,3 +49,5 @@ private:
 };
 //---------------------------------------------------------------------------
 #endif
+
+// EOF

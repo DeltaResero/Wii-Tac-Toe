@@ -1,3 +1,14 @@
+// source/player.cpp
+// SPDX-License-Identifier: MIT
+//
+// Wii-Tac-Toe
+//
+// Copyright (C) 2025 Crayon
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the MIT License. A copy of the license is
+// located in the LICENSE file included with this distribution.
+
 #include "player.h"
 
 /**
@@ -87,3 +98,5 @@ playerType Player::GetType() const
 {
     return Type;
 }
+
+// EOF

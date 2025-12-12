@@ -1,3 +1,14 @@
+// source/language.cpp
+// SPDX-License-Identifier: MIT
+//
+// Wii-Tac-Toe
+//
+// Copyright (C) 2025 Crayon
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the MIT License. A copy of the license is
+// located in the LICENSE file included with this distribution.
+
 #include <mxml.h>
 #include <ogc/conf.h>
 #include <random>  // Add for random number generator
@@ -195,3 +206,5 @@ std::string Language::GetTurnOverMessage(s32 Index)
     }
     return TurnOverMessage[Index];
 }
+
+// EOF

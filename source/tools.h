@@ -1,7 +1,13 @@
-/**
- * @file tools.h
- * Contains different tools.
- */
+// source/tools.h
+// SPDX-License-Identifier: MIT
+//
+// Wii-Tac-Toe
+//
+// Copyright (C) 2025 Crayon
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the MIT License. A copy of the license is
+// located in the LICENSE file included with this distribution.
 
 #ifndef ToolsH
 #define ToolsH
@@ -24,3 +30,5 @@ void Draw_FadeOut(Texture *tex, f32 scaleX, f32 scaleY, u16 speed);
                 const int wpadx, const int wpady);
 //---------------------------------------------------------------------------
 #endif
+
+// EOF

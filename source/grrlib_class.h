@@ -1,7 +1,13 @@
-/**
- * @file grrlib_class.h
- * Contains the GRRLIB wrapper class.
- */
+// source/grrlib_class.h
+// SPDX-License-Identifier: MIT
+//
+// Wii-Tac-Toe
+//
+// Copyright (C) 2025 Crayon
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the MIT License. A copy of the license is
+// located in the LICENSE file included with this distribution.
 
 #ifndef GRRLIB_WrapperH
 #define GRRLIB_WrapperH
@@ -120,3 +126,5 @@ using namespace FX;
 using namespace GRRLIBpp;
 //---------------------------------------------------------------------------
 #endif
+
+// EOF
