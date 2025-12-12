@@ -107,7 +107,7 @@ private:
 
     std::array<std::unique_ptr<Button>, 3> ExitButton;
     std::array<std::unique_ptr<Button>, 3> MenuButton;
-    Grid *GameGrid;
+    std::unique_ptr<Grid> GameGrid;
     Language *Lang;
     std::array<std::array<Symbol, 3>, 3> GridSign;
     Audio *GameAudio;
