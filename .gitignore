@@ -1,24 +1,75 @@
-# Folder
-/build
+#
+# NOTE! Please use 'git ls-files -i --exclude-standard'
+# command after changing this file, to see if there are
+# any tracked files which get ignored after the change.
+#
 
-# Executable file
-*.dol
+# ===================================================================
+# Build output directories
+# ===================================================================
+# Catches build/, build_debug/, build_wii/, etc.
+build*/
+
+# ===================================================================
+# Compiled files and build artifacts
+# ===================================================================
+# Object files, libraries, dependency files, and executables
+*.o
+*.a
+*.d
 *.elf
+*.dol
 
-# Archive
+# ===================================================================
+# CMake generated files
+# ===================================================================
+# Protects against accidentally running cmake in the root directory
+Makefile
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+CPackConfig.cmake
+CPackSourceConfig.cmake
+
+# ===================================================================
+# Packaged output
+# ===================================================================
+# CPack generated archives and directories
 *.zip
+_CPack_Packages/
 
+# ===================================================================
+# IDE / Editor configuration
+# ===================================================================
+# Visual Studio Code
+.vscode/
+# JetBrains IDEs (CLion, etc.)
+.idea/
+# Visual Studio
+.vs/
+# KDevelop
+*.kdev4
+
+# ===================================================================
+# OS-specific files
+# ===================================================================
+# macOS custom folder attributes
+.DS_Store
 # Windows thumbnail cache
 Thumbs.db
 
+# ===================================================================
 # Miscellaneous temporary files
-#
+# ===================================================================
+# Backup and patch files created by editors and tools
+*~
+\#*#
+*.bak
 *.diff
 *.orig
 *.patch
 *.rej
-*~
-#*#
 
-# User file
-CMakeUserPresets.json

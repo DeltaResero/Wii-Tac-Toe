@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.24)
 project(Wii-Tac-Toe LANGUAGES C CXX ASM)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # --- Default to Release build ---
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "Setting build type to 'Release' (default)")
