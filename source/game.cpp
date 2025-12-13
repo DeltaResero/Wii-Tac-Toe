@@ -352,7 +352,7 @@ void Game::GameScreen(bool CopyScreen)
         // Draw selection box
         if(GameGrid->GetPlayerAtPos(HandX, HandY) == ' ')
         {
-            HoverImg->Draw(Table[HandX][HandY].GetX(), Table[HandX][HandY].GetY(), 0, 1, 1, HoverColor);
+            HoverImg->Draw(Table[HandX][HandY].x, Table[HandX][HandY].y, 0, 1, 1, HoverColor);
         }
     }
     else
@@ -873,10 +873,10 @@ bool Game::SelectZone()
             for(s8 y = 0; y < 3; ++y)
             {
                 const auto &cell = Table[x][y];
-                if (Hand[HandID].GetLeft() > cell.GetX() &&
-                    Hand[HandID].GetLeft() < (cell.GetX() + 136) &&
-                    Hand[HandID].GetTop() > cell.GetY() &&
-                    Hand[HandID].GetTop() < (cell.GetY() + 100))
+                if (Hand[HandID].GetLeft() > cell.x &&
+                    Hand[HandID].GetLeft() < (cell.x + 136) &&
+                    Hand[HandID].GetTop() > cell.y &&
+                    Hand[HandID].GetTop() < (cell.y + 100))
                 {
                     if(HandX != x || HandY != y)
                     {

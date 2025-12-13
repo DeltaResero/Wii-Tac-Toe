@@ -64,7 +64,7 @@ void Symbol::SetPlayer(u8 APlayer)
  */
 void Symbol::SetLocation(Point APoint)
 {
-    Object::SetLocation(APoint.GetX(), APoint.GetY());
+    Object::SetLocation(APoint.x, APoint.y);
 }
 
 // EOF
