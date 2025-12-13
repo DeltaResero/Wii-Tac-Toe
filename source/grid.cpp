@@ -86,6 +86,17 @@ void Grid::SetPlayerAI(u8 Player)
 }
 
 /**
+ * Check if a position is part of the winning combination.
+ * @param[in] X X coordinate in the grid.
+ * @param[in] Y Y coordinate in the grid.
+ * @return True if this position is part of the winning combination.
+ */
+bool Grid::IsWinningPosition(u8 X, u8 Y) const
+{
+    return WinningBoard[X][Y];
+}
+
+/**
  * Return the player at a certain position.
  * @param[in] X X coordinate in the grid.
  * @param[in] Y Y coordinate in the grid.

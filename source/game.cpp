@@ -338,7 +338,7 @@ void Game::GameScreen(bool CopyScreen)
             GridSign[x][y].SetPlayer(GameGrid->GetPlayerAtPos(x, y));
             GridSign[x][y].SetColor(0xFFFFFFFF);
             GridSign[x][y].Paint();
-            if(GameGrid->WinningBoard[x][y])
+            if(GameGrid->IsWinningPosition(x, y))
             {
                 GridSign[x][y].SetColor(HoverColor);
                 GridSign[x][y].SetAlpha(SymbolAlpha);

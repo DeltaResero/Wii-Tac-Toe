@@ -36,12 +36,13 @@ public:
     [[nodiscard]] u8 GetWinner() const;
     void Clear();
     [[nodiscard]] bool IsFilled();
-    bool WinningBoard[3][3]; /**< A board filled with the winning position. */
+    [[nodiscard]] bool IsWinningPosition(u8 X, u8 Y) const;
 private:
     u8 Board[3][3];
     u8 Winner;
     std::mt19937 Generator;
     std::uniform_int_distribution<u8> Distribution;
+    bool WinningBoard[3][3]; /**< A board filled with the winning position. */
 
     [[nodiscard]] bool IsPlayerWinning(u8 Player);
     [[nodiscard]] bool IsPlayerWinning(u8 Player, const u8 MyBoard[3][3]);
