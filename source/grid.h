@@ -15,6 +15,7 @@
 
 #include <gctypes.h>
 #include <random>
+#include <array>
 
 /**
  * Tic-Tac-Toe grid.
@@ -38,14 +39,14 @@ public:
     [[nodiscard]] bool IsFilled();
     [[nodiscard]] bool IsWinningPosition(u8 X, u8 Y) const;
 private:
-    u8 Board[3][3];
+    std::array<std::array<u8, 3>, 3> Board;
     u8 Winner;
     std::mt19937 Generator;
     std::uniform_int_distribution<u8> Distribution;
-    bool WinningBoard[3][3]; /**< A board filled with the winning position. */
+    std::array<std::array<bool, 3>, 3> WinningBoard; /**< A board filled with the winning position. */
 
     [[nodiscard]] bool IsPlayerWinning(u8 Player);
-    [[nodiscard]] bool IsPlayerWinning(u8 Player, const u8 MyBoard[3][3]);
+    [[nodiscard]] bool IsPlayerWinning(u8 Player, const std::array<std::array<u8, 3>, 3>& MyBoard);
 };
 //---------------------------------------------------------------------------
 #endif

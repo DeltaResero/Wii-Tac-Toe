@@ -22,7 +22,10 @@ Grid::Grid() :
     Generator(std::random_device{}()),
     Distribution(std::uniform_int_distribution<u8>(0, 2))
 {
-    std::fill(&WinningBoard[0][0], &WinningBoard[0][0] + sizeof(WinningBoard), false);
+    for(auto& row : WinningBoard)
+    {
+        row.fill(false);
+    }
     Clear();
 }
 
@@ -39,7 +42,10 @@ bool Grid::SetPlayer(u8 Player, u8 X, u8 Y)
         (Player == 'X' || Player == 'O'))
     {
         Board[X][Y] = Player;
-        std::fill(&WinningBoard[0][0], &WinningBoard[0][0] + sizeof(WinningBoard), false);
+        for(auto& row : WinningBoard)
+        {
+            row.fill(false);
+        }
         if(IsPlayerWinning(Player) == true)
         {
             Winner = Player;
@@ -55,7 +61,7 @@ bool Grid::SetPlayer(u8 Player, u8 X, u8 Y)
  */
 void Grid::SetPlayerAI(u8 Player)
 {
-    u8 TestBoard[3][3];
+    std::array<std::array<u8, 3>, 3> TestBoard;
 
     // Test win or block opponent's win
     const u8 Opponent = (Player == 'X') ? 'O' : 'X';
@@ -67,7 +73,7 @@ void Grid::SetPlayerAI(u8 Player)
         {
             for(u8 y = 0; y < 3; ++y)
             {
-                std::copy(&Board[0][0], &Board[0][0] + 9, &TestBoard[0][0]);
+                TestBoard = Board;
                 if(TestBoard[x][y] == ' ')
                 {
                     TestBoard[x][y] = checkPlayer;
@@ -113,7 +119,10 @@ u8 Grid::GetPlayerAtPos(u8 X, u8 Y) const
 void Grid::Clear()
 {
     Winner = ' ';
-    std::memset(Board, ' ', sizeof(Board));
+    for(auto& row : Board)
+    {
+        row.fill(' ');
+    }
 }
 
 /**
@@ -131,7 +140,7 @@ u8 Grid::GetWinner() const
  * @param[in] MyBoard A specific board to test.
  * @return Return true if the player is winning, false otherwise.
  */
-bool Grid::IsPlayerWinning(u8 Player, const u8 MyBoard[3][3])
+bool Grid::IsPlayerWinning(u8 Player, const std::array<std::array<u8, 3>, 3>& MyBoard)
 {
     // Check rows
     if((MyBoard[0][0] == Player) & (MyBoard[1][0] == Player) & (MyBoard[2][0] == Player))
