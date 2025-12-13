@@ -155,8 +155,7 @@ std::string Language::GetWinningMessage(s32 Index)
     const s32 WinningCount = WinningMessage.size();
     if(Index < 0)
     {
-        std::uniform_int_distribution<s32> dist(0, WinningCount - 1);
-        Index = dist(rng);  // Use class-wide RNG
+        Index = rng() % WinningCount;
     }
     else if(Index >= WinningCount)
     {
@@ -176,8 +175,7 @@ std::string Language::GetTieMessage(s32 Index)
     const s32 TieCount = TieMessage.size();
     if(Index < 0)
     {
-        std::uniform_int_distribution<s32> dist(0, TieCount - 1);
-        Index = dist(rng);  // Use class-wide RNG
+        Index = rng() % TieCount;
     }
     else if(Index >= TieCount)
     {
@@ -197,8 +195,7 @@ std::string Language::GetTurnOverMessage(s32 Index)
     const s32 TurnOverCount = TurnOverMessage.size();
     if(Index < 0)
     {
-        std::uniform_int_distribution<s32> dist(0, TurnOverCount - 1);
-        Index = dist(rng);  // Use class-wide RNG
+        Index = rng() % TurnOverCount;
     }
     else if(Index >= TurnOverCount)
     {
