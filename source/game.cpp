@@ -205,7 +205,7 @@ void Game::Paint()
             // AI
             if(!RoundFinished && WTTPlayer[CurrentPlayer].GetType() == playerType::CPU)
             {   // AI
-                if(AIThinkLoop > (std::rand() % 10 + 20))
+                if(AIThinkLoop > (std::rand() % AI_THINK_VARIANCE + AI_THINK_MIN_FRAMES))
                 {
                     GameGrid->SetPlayerAI(WTTPlayer[CurrentPlayer].GetSign());
                     TurnIsOver();
@@ -224,7 +224,7 @@ void Game::Paint()
     if(CurrentScreen != gameScreen::Start &&
         WPAD_Probe(WPAD_CHAN_0, nullptr) == WPAD_ERR_NO_CONTROLLER)
     {   // Controller is disconnected
-        Rectangle(0, 0, ScreenWidth, ScreenHeight, 0x000000B2, 1);
+        Rectangle(0, 0, ScreenWidth, ScreenHeight, 0x000000 | ALPHA_DISCONNECT_OVERLAY, 1);
     }
     else
     {
@@ -324,8 +324,8 @@ void Game::GameScreen(bool CopyScreen)
     // Draw grid content
     if(RoundFinished)
     {
-        SymbolAlpha = (AlphaDirection) ? SymbolAlpha + 2 : SymbolAlpha - 2;
-        if(SymbolAlpha > 128 || SymbolAlpha < 5)
+        SymbolAlpha = (AlphaDirection) ? SymbolAlpha + SYMBOL_ALPHA_STEP : SymbolAlpha - SYMBOL_ALPHA_STEP;
+        if(SymbolAlpha > SYMBOL_ALPHA_MAX || SymbolAlpha < SYMBOL_ALPHA_MIN)
         {
             AlphaDirection = !AlphaDirection;
         }
@@ -646,7 +646,7 @@ bool Game::ControllerManager()
                         }
                         else
                         {   // Position is invalid
-                            RUMBLE_Wiimote(WPAD_CHAN_0, 200); // 200 ms
+                            RUMBLE_Wiimote(WPAD_CHAN_0, RUMBLE_INVALID_MOVE);
                         }
                     }
                     else if(GameGrid->SetPlayer(WTTPlayer[CurrentPlayer].GetSign(), HandX, HandY))
@@ -655,7 +655,7 @@ bool Game::ControllerManager()
                     }
                     else
                     {
-                        RUMBLE_Wiimote(WPAD_CHAN_0, 200); // 200 ms
+                        RUMBLE_Wiimote(WPAD_CHAN_0, RUMBLE_INVALID_MOVE);
                     }
                 }
 
@@ -667,7 +667,7 @@ bool Game::ControllerManager()
                     }
                     else
                     {   // Position is invalid
-                        RUMBLE_Wiimote(WPAD_CHAN_1, 200); // 200 ms
+                        RUMBLE_Wiimote(WPAD_CHAN_1, RUMBLE_INVALID_MOVE);
                     }
                 }
                 break;
@@ -728,7 +728,7 @@ void Game::TurnIsOver()
         text = std::format(std::runtime_format(Lang->GetWinningMessage()),
             WTTPlayer[GameWinner].GetName(), WTTPlayer[!GameWinner].GetName());
         RoundFinished = true;
-        SymbolAlpha = 5;
+        SymbolAlpha = SYMBOL_ALPHA_MIN;
         AlphaDirection = false;
     }
     else if(GameGrid->IsFilled() == true)
@@ -854,7 +854,7 @@ void Game::ButtonOn(s8 NewFocusedButton)
     if(FocusedButton != NewFocusedButton)
     {
         GameAudio->PlaySoundButton(80);
-        RUMBLE_Wiimote(WPAD_CHAN_0, 50); // 50 ms
+        RUMBLE_Wiimote(WPAD_CHAN_0, RUMBLE_BUTTON_HOVER);
     }
 }
 
@@ -885,7 +885,7 @@ bool Game::SelectZone()
                         if(GameGrid->GetPlayerAtPos(HandX, HandY) == ' ')
                         {   // Zone is empty
                             GameAudio->PlaySoundButton(90);
-                            RUMBLE_Wiimote(HandID, 30); // 30 ms
+                            RUMBLE_Wiimote(HandID, RUMBLE_ZONE_SELECT);
                         }
                     }
                     return true;
@@ -903,8 +903,8 @@ bool Game::SelectZone()
  */
 void Game::ChangeCursor()
 {
-    constexpr u8 fullAlpha = 0xFF;
-    constexpr u8 lowAlpha = 0x55;
+    constexpr u8 fullAlpha = ALPHA_FULL;
+    constexpr u8 lowAlpha = ALPHA_LOW;
 
     if(CurrentScreen == gameScreen::Home)
     {

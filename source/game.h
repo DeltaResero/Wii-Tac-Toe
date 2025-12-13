@@ -105,6 +105,27 @@ private:
     u8 AIThinkLoop;
     bool Copied;
 
+    // AI timing constants
+    static constexpr u8 AI_THINK_MIN_FRAMES = 20;
+    static constexpr u8 AI_THINK_VARIANCE = 10;
+
+    // Animation constants
+    static constexpr u8 SYMBOL_ALPHA_MIN = 5;
+    static constexpr u8 SYMBOL_ALPHA_MAX = 128;
+    static constexpr u8 SYMBOL_ALPHA_STEP = 2;
+
+    // Alpha channel constants
+    static constexpr u8 ALPHA_FULL = 0xFF;
+    static constexpr u8 ALPHA_LOW = 0x55;
+
+    // Controller disconnect overlay alpha
+    static constexpr u8 ALPHA_DISCONNECT_OVERLAY = 0xB2;
+
+    // Rumble durations (milliseconds)
+    static constexpr int RUMBLE_INVALID_MOVE = 200;
+    static constexpr int RUMBLE_BUTTON_HOVER = 50;
+    static constexpr int RUMBLE_ZONE_SELECT = 30;
+
     std::array<std::unique_ptr<Button>, 3> ExitButton;
     std::array<std::unique_ptr<Button>, 3> MenuButton;
     std::unique_ptr<Grid> GameGrid;
