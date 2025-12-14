@@ -194,6 +194,7 @@ private:
     bool SelectZone();
     void ChangeCursor();
     void CalculateFrameRate();
+    void DrawStripeBackground(u32 color, u32 spacing, u32 thickness);
 
     std::array<Cursor, 4> Hand;
     s8 HandX;

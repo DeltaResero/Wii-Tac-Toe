@@ -480,10 +480,7 @@ void Game::MenuScreen(bool CopyScreen)
     if(!Copied)
     {   // Copy static element
         FillScreen(0x000000FF); // Clear screen
-        for(int y = 0; y <= ScreenHeight; y += MENU_STRIPE_SPACING)
-        {
-            Rectangle(0, y, ScreenWidth, MENU_STRIPE_THICKNESS, MENU_STRIPE_COLOR, 1);
-        }
+        DrawStripeBackground(MENU_STRIPE_COLOR, MENU_STRIPE_SPACING, MENU_STRIPE_THICKNESS);
 
         Rectangle(0, 0, ScreenWidth, MENU_TOP_BAR_HEIGHT, MENU_BAR_COLOR, 1);
         Rectangle(0, MENU_SEPARATOR_TOP, ScreenWidth, MENU_STRIPE_THICKNESS, MENU_SEPARATOR_COLOR, 1);
@@ -529,6 +526,20 @@ void Game::MenuScreen(bool CopyScreen)
     for(int i = 0; i < 3; ++i)
     {
         MenuButton[i]->Paint();
+    }
+}
+
+/**
+ * Draw a striped background pattern.
+ * @param[in] color The color of the stripes in RGBA format.
+ * @param[in] spacing The spacing between stripes in pixels.
+ * @param[in] thickness The thickness of each stripe in pixels.
+ */
+void Game::DrawStripeBackground(u32 color, u32 spacing, u32 thickness)
+{
+    for(int y = 0; y <= ScreenHeight; y += spacing)
+    {
+        Rectangle(0, y, ScreenWidth, thickness, color, true);
     }
 }
 
