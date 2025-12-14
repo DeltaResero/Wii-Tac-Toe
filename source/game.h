@@ -182,6 +182,7 @@ private:
     // Text wrapping
     static constexpr f32 LINE_HEIGHT_MULTIPLIER = 1.2f;
 
+    void ResetStartScreen();
     void StartScreen();
     void MenuScreen(bool CopyScreen);
     void GameScreen(bool CopyScreen);
@@ -208,6 +209,10 @@ private:
     gameScreen LastScreen;
     s8 FocusedButton;
     std::string text;
+
+    // Start screen animation state
+    f32 ArmRotation{0.0f};
+    bool ArmDirection{false};
 
     u16 TieGame;
     bool RoundFinished;

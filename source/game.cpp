@@ -252,21 +252,27 @@ void Game::Paint()
 }
 
 /**
+ * Reset the start screen animation.
+ */
+void Game::ResetStartScreen()
+{
+    ArmRotation = 0.0f;
+    ArmDirection = false;
+}
+
+/**
  * Draw the start screen.
  */
 void Game::StartScreen()
 {
-    static f32 ArmRotation = 0;
-    static bool ArmDirection = 0;
-
     SplashImg->Draw(0, 0); // Background
 
-    if(ArmDirection == 0)
+    if(ArmDirection == false)
     {
         ArmRotation += ARM_ROTATION_STEP;
         if(ArmRotation > ARM_ROTATION_MAX)
         {
-            ArmDirection = 1;
+            ArmDirection = true;
         }
     }
     else
@@ -274,7 +280,7 @@ void Game::StartScreen()
         ArmRotation -= ARM_ROTATION_STEP;
         if(ArmRotation < ARM_ROTATION_MIN)
         {
-            ArmDirection = 0;
+            ArmDirection = false;
         }
     }
     GRRLIB_ClipDrawing(ARM_CLIP_X, ARM_CLIP_Y, ARM_CLIP_W, ARM_CLIP_H);
@@ -854,6 +860,11 @@ void Game::ChangeScreen(gameScreen NewScreen, bool PlaySound)
     FocusedButton = -1;
     LastScreen = CurrentScreen;
     CurrentScreen = NewScreen;
+
+    if(NewScreen == gameScreen::Start)
+    {
+        ResetStartScreen();
+    }
 
     Copied = false;
     ChangeCursor();
