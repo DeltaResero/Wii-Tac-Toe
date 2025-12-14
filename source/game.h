@@ -223,8 +223,8 @@ private:
     u8 FrameCount{0};
     u32 LastFrameTime{0};
 
-    u16 ScreenWidth;
-    u16 ScreenHeight;
+    const u16 ScreenWidth;
+    const u16 ScreenHeight;
 
     gameMode GameMode;
 
