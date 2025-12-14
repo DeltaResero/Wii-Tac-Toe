@@ -85,7 +85,8 @@ Game::Game(u16 GameScreenWidth, u16 GameScreenHeight) :
     {
         for(u8 y = 0; y < 3; ++y)
         {
-            GridSign[x][y].SetLocation(Table[x][y]);
+            const auto& [gridX, gridY] = Table[x][y];
+            GridSign[x][y].SetLocation({gridX, gridY});
         }
     }
 
@@ -358,7 +359,8 @@ void Game::GameScreen(bool CopyScreen)
         // Draw selection box
         if(GameGrid->GetPlayerAtPos(HandX, HandY) == ' ')
         {
-            HoverImg->Draw(Table[HandX][HandY].x, Table[HandX][HandY].y, 0, 1, 1, HoverColor);
+            const auto& [hoverX, hoverY] = Table[HandX][HandY];
+            HoverImg->Draw(hoverX, hoverY, 0, 1, 1, HoverColor);
         }
     }
     else
@@ -877,11 +879,11 @@ bool Game::SelectZone()
         {
             for(s8 y = 0; y < 3; ++y)
             {
-                const auto &cell = Table[x][y];
-                if (Hand[HandID].GetLeft() > cell.x &&
-                    Hand[HandID].GetLeft() < (cell.x + 136) &&
-                    Hand[HandID].GetTop() > cell.y &&
-                    Hand[HandID].GetTop() < (cell.y + 100))
+                const auto& [cellX, cellY] = Table[x][y];
+                if (Hand[HandID].GetLeft() > cellX &&
+                    Hand[HandID].GetLeft() < (cellX + GRID_CELL_WIDTH) &&
+                    Hand[HandID].GetTop() > cellY &&
+                    Hand[HandID].GetTop() < (cellY + GRID_CELL_HEIGHT))
                 {
                     if(HandX != x || HandY != y)
                     {

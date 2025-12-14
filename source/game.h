@@ -114,6 +114,10 @@ private:
     static constexpr f32 HOVER_CIRCLE_RADIUS = 40.0f;
     static constexpr f32 HOVER_IMAGE_OFFSET = 52.0f;
 
+    // Grid cell dimensions
+    static constexpr f32 GRID_CELL_WIDTH = 136.0f;
+    static constexpr f32 GRID_CELL_HEIGHT = 100.0f;
+
     // Home screen layout
     static constexpr f32 HOME_TOP_BAR_HEIGHT = 78.0f;
     static constexpr f32 HOME_SEPARATOR_TOP = 78.0f;
