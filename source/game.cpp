@@ -63,6 +63,8 @@ static constexpr size_t MaxScoreLength = std::numeric_limits<u16>::digits10 + 2;
 Game::Game(u16 GameScreenWidth, u16 GameScreenHeight) :
     FPS(0),
     ShowFPS(false),
+    FrameCount(0),
+    LastFrameTime(0),
     ScreenWidth(GameScreenWidth),
     ScreenHeight(GameScreenHeight),
     GameMode(gameMode::VsHuman1),
@@ -173,6 +175,10 @@ Game::Game(u16 GameScreenWidth, u16 GameScreenHeight) :
     // Initialize Audio and Rumble
     GameAudio = std::make_unique<Audio>();
     RUMBLE_Init();
+
+    // Initialize frame timing
+    LastFrameTime = ticks_to_millisecs(gettime());
+
     NewGame();
 }
 
@@ -958,16 +964,13 @@ void Game::ChangeCursor()
  */
 void Game::CalculateFrameRate()
 {
-    static u8 frameCount = 0;
-    static u32 lastTime = ticks_to_millisecs(gettime());
-
-    ++frameCount;
+    ++FrameCount;
     const u32 currentTime = ticks_to_millisecs(gettime());
-    if (currentTime - lastTime > 1000)
+    if (currentTime - LastFrameTime > 1000)
     {
-        lastTime = currentTime;
-        FPS = frameCount;
-        frameCount = 0;
+        LastFrameTime = currentTime;
+        FPS = FrameCount;
+        FrameCount = 0;
     }
 }
 
