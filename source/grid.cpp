@@ -142,48 +142,22 @@ u8 Grid::GetWinner() const
  */
 bool Grid::IsPlayerWinning(u8 Player, const std::array<std::array<u8, 3>, 3>& MyBoard)
 {
-    // Check rows
-    if((MyBoard[0][0] == Player) & (MyBoard[1][0] == Player) & (MyBoard[2][0] == Player))
+    for (const auto& pattern : WinPatterns)
     {
-        WinningBoard[0][0] = true; WinningBoard[1][0] = true; WinningBoard[2][0] = true;
-        return true;
-    }
-    if((MyBoard[0][1] == Player) & (MyBoard[1][1] == Player) & (MyBoard[2][1] == Player))
-    {
-        WinningBoard[0][1] = true; WinningBoard[1][1] = true; WinningBoard[2][1] = true;
-        return true;
-    }
-    if((MyBoard[0][2] == Player) & (MyBoard[1][2] == Player) & (MyBoard[2][2] == Player))
-    {
-        WinningBoard[0][2] = true; WinningBoard[1][2] = true; WinningBoard[2][2] = true;
-        return true;
-    }
-    // Check columns
-    if((MyBoard[0][0] == Player) & (MyBoard[0][1] == Player) & (MyBoard[0][2] == Player))
-    {
-        WinningBoard[0][0] = true; WinningBoard[0][1] = true; WinningBoard[0][2] = true;
-        return true;
-    }
-    if((MyBoard[1][0] == Player) & (MyBoard[1][1] == Player) & (MyBoard[1][2] == Player))
-    {
-        WinningBoard[1][0] = true; WinningBoard[1][1] = true; WinningBoard[1][2] = true;
-        return true;
-    }
-    if((MyBoard[2][0] == Player) & (MyBoard[2][1] == Player) & (MyBoard[2][2] == Player))
-    {
-        WinningBoard[2][0] = true; WinningBoard[2][1] = true; WinningBoard[2][2] = true;
-        return true;
-    }
-    // Check diagonals
-    if((MyBoard[0][0] == Player) & (MyBoard[1][1] == Player) & (MyBoard[2][2] == Player))
-    {
-        WinningBoard[0][0] = true; WinningBoard[1][1] = true; WinningBoard[2][2] = true;
-        return true;
-    }
-    if((MyBoard[2][0] == Player) & (MyBoard[1][1] == Player) & (MyBoard[0][2] == Player))
-    {
-        WinningBoard[2][0] = true; WinningBoard[1][1] = true; WinningBoard[0][2] = true;
-        return true;
+        const auto& [pos1, pos2, pos3] = pattern;
+        const auto& [x1, y1] = pos1;
+        const auto& [x2, y2] = pos2;
+        const auto& [x3, y3] = pos3;
+
+        if ((MyBoard[x1][y1] == Player) &
+            (MyBoard[x2][y2] == Player) &
+            (MyBoard[x3][y3] == Player))
+        {
+            WinningBoard[x1][y1] = true;
+            WinningBoard[x2][y2] = true;
+            WinningBoard[x3][y3] = true;
+            return true;
+        }
     }
     return false;
 }
