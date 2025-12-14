@@ -60,6 +60,124 @@ private:
         Menu    /**< Menu screen. */
     };
 
+    // Layout constants
+    static constexpr f32 EXIT_BUTTON_HOME_LEFT = 430.0f;
+    static constexpr f32 EXIT_BUTTON_HOME_TOP = 20.0f;
+    static constexpr u32 EXIT_BUTTON_HOME_TEXT_HEIGHT = 20;
+
+    static constexpr f32 EXIT_BUTTON_MENU_OFFSET = 20.0f;
+    static constexpr f32 EXIT_BUTTON_MENU_TOP = 165.0f;
+
+    static constexpr f32 MENU_BUTTON_TOP_FIRST = 92.0f;
+    static constexpr f32 MENU_BUTTON_TOP_SECOND = 292.0f;
+    static constexpr f32 MENU_BUTTON_TOP_THIRD = 192.0f;
+
+    // Player name rendering offsets
+    static constexpr f32 PLAYER_NAME_LEFT = 44.0f;
+    static constexpr f32 PLAYER1_NAME_TOP = 48.0f;
+    static constexpr f32 PLAYER2_NAME_TOP = 143.0f;
+    static constexpr f32 TIE_NAME_TOP = 248.0f;
+    static constexpr f32 PLAYER_NAME_WIDTH = 125.0f;
+    static constexpr u32 PLAYER_NAME_FONT_SIZE = 15;
+    static constexpr s8 PLAYER_NAME_SHADOW_X = -2;
+    static constexpr s8 PLAYER_NAME_SHADOW_Y = 2;
+
+    // Player name colors
+    static constexpr u32 PLAYER1_NAME_COLOR = 0x6BB6DEFF;
+    static constexpr u32 PLAYER2_NAME_COLOR = 0xE6313AFF;
+    static constexpr u32 TIE_NAME_COLOR = 0x109642FF;
+    static constexpr u32 NAME_TEXT_COLOR = 0xFFFFFFFF;
+
+    // Score display positions
+    static constexpr f32 SCORE_CENTER_X = 104.0f;
+    static constexpr f32 PLAYER1_SCORE_TOP = 75.0f;
+    static constexpr f32 PLAYER2_SCORE_TOP = 175.0f;
+    static constexpr f32 TIE_SCORE_TOP = 280.0f;
+    static constexpr u32 SCORE_FONT_SIZE = 35;
+    static constexpr f32 SCORE_SHADOW_OFFSET = 2.0f;
+
+    // Bottom text display
+    static constexpr f32 BOTTOM_TEXT_LEFT = 130.0f;
+    static constexpr f32 BOTTOM_TEXT_TOP = 420.0f;
+    static constexpr f32 BOTTOM_TEXT_WIDTH = 390.0f;
+    static constexpr u32 BOTTOM_TEXT_FONT_SIZE = 15;
+    static constexpr u32 BOTTOM_TEXT_COLOR = 0x8C8A8CFF;
+    static constexpr u32 BOTTOM_TEXT_SHADOW_COLOR = 0x111111FF;
+    static constexpr s8 BOTTOM_TEXT_SHADOW_X = 1;
+    static constexpr s8 BOTTOM_TEXT_SHADOW_Y = 1;
+
+    // Game hover circles (for home/menu button areas)
+    static constexpr f32 HOME_CIRCLE_X = 65.0f;
+    static constexpr f32 HOME_CIRCLE_Y = 409.0f;
+    static constexpr f32 MENU_CIRCLE_X = 571.0f;
+    static constexpr f32 MENU_CIRCLE_Y = 409.5f;
+    static constexpr f32 HOVER_CIRCLE_RADIUS = 40.0f;
+    static constexpr f32 HOVER_IMAGE_OFFSET = 52.0f;
+
+    // Home screen layout
+    static constexpr f32 HOME_TOP_BAR_HEIGHT = 78.0f;
+    static constexpr f32 HOME_SEPARATOR_TOP = 78.0f;
+    static constexpr f32 HOME_SEPARATOR_BOTTOM = 383.0f;
+    static constexpr f32 HOME_SEPARATOR_HEIGHT = 2.0f;
+    static constexpr f32 HOME_BOTTOM_BAR_TOP = 385.0f;
+    static constexpr f32 HOME_BOTTOM_BAR_HEIGHT = 95.0f;
+    static constexpr f32 HOME_TITLE_LEFT = 30.0f;
+    static constexpr f32 HOME_TITLE_TOP = 20.0f;
+    static constexpr u32 HOME_TITLE_FONT_SIZE = 30;
+    static constexpr u32 HOME_OVERLAY_COLOR = 0x000000CC;
+    static constexpr u32 HOME_SEPARATOR_COLOR = 0x848284FF;
+    static constexpr u32 HOME_BAR_COLOR = 0x000000FF;
+    static constexpr u32 HOME_HIGHLIGHT_COLOR = 0x30B6EBFF;
+
+    // Menu screen layout
+    static constexpr f32 MENU_TOP_BAR_HEIGHT = 63.0f;
+    static constexpr f32 MENU_SEPARATOR_TOP = 63.0f;
+    static constexpr f32 MENU_SEPARATOR_BOTTOM = 383.0f;
+    static constexpr f32 MENU_VERSION_LEFT = 500.0f;
+    static constexpr f32 MENU_VERSION_TOP = 40.0f;
+    static constexpr u32 MENU_VERSION_FONT_SIZE = 12;
+    static constexpr u32 MENU_STRIPE_SPACING = 8;
+    static constexpr u32 MENU_STRIPE_THICKNESS = 2;
+    static constexpr u32 MENU_STRIPE_COLOR = 0xB0B0B030;
+    static constexpr u32 MENU_BAR_COLOR = 0x000000FF;
+    static constexpr u32 MENU_SEPARATOR_COLOR = 0xFFFFFFFF;
+
+    // Start screen
+    static constexpr f32 START_ARM_X = 146.0f;
+    static constexpr f32 START_ARM_Y = 62.0f;
+    static constexpr f32 ARM_ROTATION_MAX = 40.0f;
+    static constexpr f32 ARM_ROTATION_MIN = -15.0f;
+    static constexpr f32 ARM_ROTATION_STEP = 0.5f;
+    static constexpr f32 ARM_CLIP_X = 158.0f;
+    static constexpr f32 ARM_CLIP_Y = 40.0f;
+    static constexpr f32 ARM_CLIP_W = 100.0f;
+    static constexpr f32 ARM_CLIP_H = 145.0f;
+    static constexpr f32 START_TEXT_TOP = 400.0f;
+    static constexpr u32 START_TEXT_FONT_SIZE = 20;
+    static constexpr u32 START_TEXT_COLOR = 0x000000FF;
+
+    // Programmer credits
+    static constexpr f32 CREDITS_LEFT = 50.0f;
+    static constexpr f32 CREDITS_PROGRAMMER_TOP = 310.0f;
+    static constexpr f32 CREDITS_GRAPHICS_TOP = 330.0f;
+    static constexpr u32 CREDITS_FONT_SIZE = 11;
+    static constexpr u32 CREDITS_TEXT_COLOR = 0xFFFFFFFF;
+
+    // FPS display
+    static constexpr f32 FPS_LEFT = 15.0f;
+    static constexpr f32 FPS_TOP = 445.0f;
+    static constexpr f32 FPS_SHADOW_X_1 = 14.0f;
+    static constexpr f32 FPS_SHADOW_Y_1 = 444.0f;
+    static constexpr f32 FPS_SHADOW_X_2 = 16.0f;
+    static constexpr f32 FPS_SHADOW_Y_2 = 446.0f;
+    static constexpr u32 FPS_FONT_SIZE = 17;
+    static constexpr u32 FPS_SHADOW_COLOR_1 = 0x000000FF;
+    static constexpr u32 FPS_TEXT_COLOR = 0xFFFFFFFF;
+    static constexpr u32 FPS_SHADOW_COLOR_2 = 0x808080FF;
+
+    // Text wrapping
+    static constexpr f32 LINE_HEIGHT_MULTIPLIER = 1.2f;
+
     void StartScreen();
     void MenuScreen(bool CopyScreen);
     void GameScreen(bool CopyScreen);

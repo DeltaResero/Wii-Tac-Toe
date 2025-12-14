@@ -96,39 +96,39 @@ Game::Game(u16 GameScreenWidth, u16 GameScreenHeight) :
     // Initialize Exit and Menu buttons
     ExitButton[0] = std::make_unique<Button>(buttonType::Home);
     ExitButton[0]->SetFont(DefaultFont);
-    ExitButton[0]->SetLeft(430);
-    ExitButton[0]->SetTop(20);
-    ExitButton[0]->SetTextHeight(20);
+    ExitButton[0]->SetLeft(EXIT_BUTTON_HOME_LEFT);
+    ExitButton[0]->SetTop(EXIT_BUTTON_HOME_TOP);
+    ExitButton[0]->SetTextHeight(EXIT_BUTTON_HOME_TEXT_HEIGHT);
     ExitButton[0]->SetCaption(Lang->String("Close"));
 
     ExitButton[1] = std::make_unique<Button>(buttonType::HomeMenu);
     ExitButton[1]->SetFont(DefaultFont);
-    ExitButton[1]->SetLeft((ScreenWidth / 2.0f) + 20.0f);
-    ExitButton[1]->SetTop(165);
+    ExitButton[1]->SetLeft((ScreenWidth / 2.0f) + EXIT_BUTTON_MENU_OFFSET);
+    ExitButton[1]->SetTop(EXIT_BUTTON_MENU_TOP);
     ExitButton[1]->SetCaption(Lang->String("Reset"));
 
     ExitButton[2] = std::make_unique<Button>(buttonType::HomeMenu);
     ExitButton[2]->SetFont(DefaultFont);
-    ExitButton[2]->SetLeft((ScreenWidth / 2.0f) - ExitButton[1]->GetWidth() - 20.0f);
-    ExitButton[2]->SetTop(165);
+    ExitButton[2]->SetLeft((ScreenWidth / 2.0f) - ExitButton[1]->GetWidth() - EXIT_BUTTON_MENU_OFFSET);
+    ExitButton[2]->SetTop(EXIT_BUTTON_MENU_TOP);
     ExitButton[2]->SetCaption(Lang->String("Return to Loader"));
 
     MenuButton[0] = std::make_unique<Button>();
     MenuButton[0]->SetFont(DefaultFont);
     MenuButton[0]->SetLeft((ScreenWidth / 2.0f) - (MenuButton[0]->GetWidth() / 2.0f));
-    MenuButton[0]->SetTop(92);
+    MenuButton[0]->SetTop(MENU_BUTTON_TOP_FIRST);
     MenuButton[0]->SetCaption(Lang->String("2 Players (1 Wiimote)"));
 
     MenuButton[1] = std::make_unique<Button>();
     MenuButton[1]->SetFont(DefaultFont);
     MenuButton[1]->SetLeft((ScreenWidth / 2.0f) - (MenuButton[1]->GetWidth() / 2.0f));
-    MenuButton[1]->SetTop(292);
+    MenuButton[1]->SetTop(MENU_BUTTON_TOP_SECOND);
     MenuButton[1]->SetCaption(Lang->String("1 Player (Vs AI)"));
 
     MenuButton[2] = std::make_unique<Button>();
     MenuButton[2]->SetFont(DefaultFont);
     MenuButton[2]->SetLeft((ScreenWidth / 2.0f) - (MenuButton[2]->GetWidth() / 2.0f));
-    MenuButton[2]->SetTop(192);
+    MenuButton[2]->SetTop(MENU_BUTTON_TOP_THIRD);
     MenuButton[2]->SetCaption(Lang->String("2 Players (2 Wiimotes)"));
 
     // Initialize players
@@ -149,22 +149,22 @@ Game::Game(u16 GameScreenWidth, u16 GameScreenHeight) :
     // Player name with a shadow offset of -2, 2 (includes game background)
     // GameText should only be modified when player names changed.
     GameImg->Draw(0, 0);
-    PrintWrapText(44, 48, 125, WTTPlayer[0].GetName(), 15, 0xFFFFFFFF, 0x6BB6DEFF, -2, 2);
-    PrintWrapText(44, 143, 125, WTTPlayer[1].GetName(), 15, 0xFFFFFFFF, 0xE6313AFF, -2, 2);
-    PrintWrapText(44, 248, 125, Lang->String("TIE GAME"), 15, 0xFFFFFFFF, 0x109642FF, -2, 2);
+    PrintWrapText(PLAYER_NAME_LEFT, PLAYER1_NAME_TOP, PLAYER_NAME_WIDTH, WTTPlayer[0].GetName(), PLAYER_NAME_FONT_SIZE, NAME_TEXT_COLOR, PLAYER1_NAME_COLOR, PLAYER_NAME_SHADOW_X, PLAYER_NAME_SHADOW_Y);
+    PrintWrapText(PLAYER_NAME_LEFT, PLAYER2_NAME_TOP, PLAYER_NAME_WIDTH, WTTPlayer[1].GetName(), PLAYER_NAME_FONT_SIZE, NAME_TEXT_COLOR, PLAYER2_NAME_COLOR, PLAYER_NAME_SHADOW_X, PLAYER_NAME_SHADOW_Y);
+    PrintWrapText(PLAYER_NAME_LEFT, TIE_NAME_TOP, PLAYER_NAME_WIDTH, Lang->String("TIE GAME"), PLAYER_NAME_FONT_SIZE, NAME_TEXT_COLOR, TIE_NAME_COLOR, PLAYER_NAME_SHADOW_X, PLAYER_NAME_SHADOW_Y);
     GameText->CopyScreen(0, 0, true);
 
     // Build Start Screen background
     SplashImg->Draw(0, 0);
-    GRRLIB_PrintfTTF(50, 310, DefaultFont,
+    GRRLIB_PrintfTTF(CREDITS_LEFT, CREDITS_PROGRAMMER_TOP, DefaultFont,
         std::format(std::runtime_format(Lang->String("Programmer: {}")), "Crayon").c_str(),
-        11, 0xFFFFFFFF);
-    GRRLIB_PrintfTTF(50, 330, DefaultFont,
+        CREDITS_FONT_SIZE, CREDITS_TEXT_COLOR);
+    GRRLIB_PrintfTTF(CREDITS_LEFT, CREDITS_GRAPHICS_TOP, DefaultFont,
         std::format(std::runtime_format(Lang->String("Graphics: {}")), "Mr_Nick666").c_str(),
-        11, 0xFFFFFFFF);
+        CREDITS_FONT_SIZE, CREDITS_TEXT_COLOR);
     text = Lang->String("Press The A Button");
-    GRRLIB_PrintfTTF((ScreenWidth / 2) - (GRRLIB_WidthTTF(DefaultFont, text.c_str(), 20) / 2),
-                    400, DefaultFont, text.c_str(), 20, 0x000000FF);
+    GRRLIB_PrintfTTF((ScreenWidth / 2) - (GRRLIB_WidthTTF(DefaultFont, text.c_str(), START_TEXT_FONT_SIZE) / 2),
+                    START_TEXT_TOP, DefaultFont, text.c_str(), START_TEXT_FONT_SIZE, START_TEXT_COLOR);
     SplashImg->CopyScreen(0, 0, true);
 
     // Set handle for arm rotation
@@ -238,9 +238,9 @@ void Game::Paint()
     {
         CalculateFrameRate();
         const auto strFPS = std::format("FPS: {}", FPS);
-        GRRLIB_PrintfTTF(15, 445, DefaultFont, strFPS.c_str(), 17, 0x000000FF);
-        GRRLIB_PrintfTTF(14, 444, DefaultFont, strFPS.c_str(), 17, 0xFFFFFFFF);
-        GRRLIB_PrintfTTF(16, 446, DefaultFont, strFPS.c_str(), 17, 0x808080FF);
+        GRRLIB_PrintfTTF(FPS_LEFT, FPS_TOP, DefaultFont, strFPS.c_str(), FPS_FONT_SIZE, FPS_SHADOW_COLOR_1);
+        GRRLIB_PrintfTTF(FPS_SHADOW_X_1, FPS_SHADOW_Y_1, DefaultFont, strFPS.c_str(), FPS_FONT_SIZE, FPS_TEXT_COLOR);
+        GRRLIB_PrintfTTF(FPS_SHADOW_X_2, FPS_SHADOW_Y_2, DefaultFont, strFPS.c_str(), FPS_FONT_SIZE, FPS_SHADOW_COLOR_2);
     }
 }
 
@@ -256,22 +256,22 @@ void Game::StartScreen()
 
     if(ArmDirection == 0)
     {
-        ArmRotation += 0.5f;
-        if(ArmRotation > 40.0f)
+        ArmRotation += ARM_ROTATION_STEP;
+        if(ArmRotation > ARM_ROTATION_MAX)
         {
             ArmDirection = 1;
         }
     }
     else
     {
-        ArmRotation -= 0.5f;
-        if(ArmRotation < -15.0f)
+        ArmRotation -= ARM_ROTATION_STEP;
+        if(ArmRotation < ARM_ROTATION_MIN)
         {
             ArmDirection = 0;
         }
     }
-    GRRLIB_ClipDrawing(158, 40, 100, 145);
-    SplashArmImg->Draw(146, 62, ArmRotation); // Arm
+    GRRLIB_ClipDrawing(ARM_CLIP_X, ARM_CLIP_Y, ARM_CLIP_W, ARM_CLIP_H);
+    SplashArmImg->Draw(START_ARM_X, START_ARM_Y, ArmRotation); // Arm
     GRRLIB_ClipReset();
 }
 
@@ -290,23 +290,23 @@ void Game::GameScreen(bool CopyScreen)
         {
             char ScoreText[MaxScoreLength] = {};
             std::to_chars(ScoreText, ScoreText + MaxScoreLength, WTTPlayer[playerIndex].GetScore());
-            const auto TextLeft = 104 - GRRLIB_WidthTTF(DefaultFont, ScoreText, 35) / 2;
-            GRRLIB_PrintfTTF(TextLeft, yPos + 2, DefaultFont, ScoreText, 35, 0xFFFFFFFF);
-            GRRLIB_PrintfTTF(TextLeft - 2, yPos, DefaultFont, ScoreText, 35, color);
+            const auto TextLeft = SCORE_CENTER_X - GRRLIB_WidthTTF(DefaultFont, ScoreText, SCORE_FONT_SIZE) / 2;
+            GRRLIB_PrintfTTF(TextLeft, yPos + SCORE_SHADOW_OFFSET, DefaultFont, ScoreText, SCORE_FONT_SIZE, NAME_TEXT_COLOR);
+            GRRLIB_PrintfTTF(TextLeft - SCORE_SHADOW_OFFSET, yPos, DefaultFont, ScoreText, SCORE_FONT_SIZE, color);
         };
 
-        DrawScore(0, 75, 0x6BB6DEFF); // Player 1
-        DrawScore(1, 175, 0xE6313AFF); // Player 2
+        DrawScore(0, PLAYER1_SCORE_TOP, PLAYER1_NAME_COLOR); // Player 1
+        DrawScore(1, PLAYER2_SCORE_TOP, PLAYER2_NAME_COLOR); // Player 2
 
         // Draw tie score
         char TieScoreText[MaxScoreLength] = {};
         std::to_chars(TieScoreText, TieScoreText + MaxScoreLength, TieGame);
-        const auto TieTextLeft = 104 - GRRLIB_WidthTTF(DefaultFont, TieScoreText, 35) / 2;
-        GRRLIB_PrintfTTF(TieTextLeft, 282, DefaultFont, TieScoreText, 35, 0x109642FF);
-        GRRLIB_PrintfTTF(TieTextLeft - 2, 280, DefaultFont, TieScoreText, 35, 0xFFFFFFFF);
+        const auto TieTextLeft = SCORE_CENTER_X - GRRLIB_WidthTTF(DefaultFont, TieScoreText, SCORE_FONT_SIZE) / 2;
+        GRRLIB_PrintfTTF(TieTextLeft, TIE_SCORE_TOP + SCORE_SHADOW_OFFSET, DefaultFont, TieScoreText, SCORE_FONT_SIZE, TIE_NAME_COLOR);
+        GRRLIB_PrintfTTF(TieTextLeft - SCORE_SHADOW_OFFSET, TIE_SCORE_TOP, DefaultFont, TieScoreText, SCORE_FONT_SIZE, NAME_TEXT_COLOR);
 
         // Draw text at the bottom with a shadow offset of 1, 1
-        PrintWrapText(130, 420, 390, text, 15, 0x8C8A8CFF, 0x111111FF, 1, 1);
+        PrintWrapText(BOTTOM_TEXT_LEFT, BOTTOM_TEXT_TOP, BOTTOM_TEXT_WIDTH, text, BOTTOM_TEXT_FONT_SIZE, BOTTOM_TEXT_COLOR, BOTTOM_TEXT_SHADOW_COLOR, BOTTOM_TEXT_SHADOW_X, BOTTOM_TEXT_SHADOW_Y);
 
         if(CopyScreen)
         {
@@ -358,15 +358,15 @@ void Game::GameScreen(bool CopyScreen)
     else
     {
         // 40 = radius, 52 = half of image size
-        if(PtInCircle(65, 409, 40, Hand[0].GetLeft(), Hand[0].GetTop()))
+        if(PtInCircle(HOME_CIRCLE_X, HOME_CIRCLE_Y, HOVER_CIRCLE_RADIUS, Hand[0].GetLeft(), Hand[0].GetTop()))
         {
-            GameHoverImg->Draw(65-52, 409.5-52, 0, 1, 1, 0xFFFFFFFF);
+            GameHoverImg->Draw(HOME_CIRCLE_X-HOVER_IMAGE_OFFSET, HOME_CIRCLE_Y-HOVER_IMAGE_OFFSET, 0, 1, 1, 0xFFFFFFFF);
             ButtonOn(0);
             FocusedButton = 0;
         }
-        else if(PtInCircle(571, 409, 40, Hand[0].GetLeft(), Hand[0].GetTop()))
+        else if(PtInCircle(MENU_CIRCLE_X, MENU_CIRCLE_Y, HOVER_CIRCLE_RADIUS, Hand[0].GetLeft(), Hand[0].GetTop()))
         {
-            GameHoverImg->Draw(571-52, 409.5-52, 0, 1, 1, 0xFFFFFFFF);
+            GameHoverImg->Draw(MENU_CIRCLE_X-HOVER_IMAGE_OFFSET, MENU_CIRCLE_Y-HOVER_IMAGE_OFFSET, 0, 1, 1, 0xFFFFFFFF);
             ButtonOn(1);
             FocusedButton = 1;
         }
@@ -397,10 +397,10 @@ void Game::ExitScreen()
                 break;
         }
 
-        Rectangle(0, 0, ScreenWidth, ScreenHeight, 0x000000CC, 1); // Draw a black rectangle over it
-        Rectangle(0, 78, ScreenWidth, 2, 0x848284FF, 1);
-        Rectangle(0, 383, ScreenWidth, 2, 0x848284FF, 1);
-        Rectangle(0, 385, ScreenWidth, 95, 0x000000FF, 1);
+        Rectangle(0, 0, ScreenWidth, ScreenHeight, HOME_OVERLAY_COLOR, 1); // Draw a black rectangle over it
+        Rectangle(0, HOME_SEPARATOR_TOP, ScreenWidth, HOME_SEPARATOR_HEIGHT, HOME_SEPARATOR_COLOR, 1);
+        Rectangle(0, HOME_SEPARATOR_BOTTOM, ScreenWidth, HOME_SEPARATOR_HEIGHT, HOME_SEPARATOR_COLOR, 1);
+        Rectangle(0, HOME_BOTTOM_BAR_TOP, ScreenWidth, HOME_BOTTOM_BAR_HEIGHT, HOME_BAR_COLOR, 1);
 
         CopiedImg->CopyScreen();
         Copied = true;
@@ -410,21 +410,21 @@ void Game::ExitScreen()
         CopiedImg->Draw(0, 0);
     }
 
-    if(GRRLIB_PtInRect(0, 0, ScreenWidth, 78, Hand[0].GetLeft(), Hand[0].GetTop()))
+    if(GRRLIB_PtInRect(0, 0, ScreenWidth, HOME_TOP_BAR_HEIGHT, Hand[0].GetLeft(), Hand[0].GetTop()))
     {
-        Rectangle(0, 0, ScreenWidth, 78, 0x30B6EBFF, 1);
+        Rectangle(0, 0, ScreenWidth, HOME_TOP_BAR_HEIGHT, HOME_HIGHLIGHT_COLOR, 1);
     }
     else
     {
-        Rectangle(0, 0, ScreenWidth, 78, 0x000000FF, 1);
+        Rectangle(0, 0, ScreenWidth, HOME_TOP_BAR_HEIGHT, HOME_BAR_COLOR, 1);
     }
 
-    GRRLIB_PrintfTTF(30, 20, DefaultFont, Lang->String("HOME Menu").c_str(), 30, 0xFFFFFFFF);
+    GRRLIB_PrintfTTF(HOME_TITLE_LEFT, HOME_TITLE_TOP, DefaultFont, Lang->String("HOME Menu").c_str(), HOME_TITLE_FONT_SIZE, 0xFFFFFFFF);
 
     ExitButton[0]->SetFocused(false);
     ExitButton[1]->SetFocused(false);
     ExitButton[2]->SetFocused(false);
-    if(GRRLIB_PtInRect(0, 0, ScreenWidth, 78, Hand[0].GetLeft(), Hand[0].GetTop()))
+    if(GRRLIB_PtInRect(0, 0, ScreenWidth, HOME_TOP_BAR_HEIGHT, Hand[0].GetLeft(), Hand[0].GetTop()))
     {
         ExitButton[0]->SetFocused(true);
         ButtonOn(0);
@@ -461,21 +461,19 @@ void Game::MenuScreen(bool CopyScreen)
     if(!Copied)
     {   // Copy static element
         FillScreen(0x000000FF); // Clear screen
-        constexpr int spacing = 8;
-        constexpr int lineThickness = 2;
-        for(int y = 0; y <= ScreenHeight; y += spacing)
+        for(int y = 0; y <= ScreenHeight; y += MENU_STRIPE_SPACING)
         {
-            Rectangle(0, y, ScreenWidth, lineThickness, 0xB0B0B030, 1);
+            Rectangle(0, y, ScreenWidth, MENU_STRIPE_THICKNESS, MENU_STRIPE_COLOR, 1);
         }
 
-        Rectangle(0, 0, ScreenWidth, 63, 0x000000FF, 1);
-        Rectangle(0, 63, ScreenWidth, lineThickness, 0xFFFFFFFF, 1);
-        Rectangle(0, 383, ScreenWidth, lineThickness, 0xFFFFFFFF, 1);
-        Rectangle(0, 385, ScreenWidth, 95, 0x000000FF, 1);
+        Rectangle(0, 0, ScreenWidth, MENU_TOP_BAR_HEIGHT, MENU_BAR_COLOR, 1);
+        Rectangle(0, MENU_SEPARATOR_TOP, ScreenWidth, MENU_STRIPE_THICKNESS, MENU_SEPARATOR_COLOR, 1);
+        Rectangle(0, MENU_SEPARATOR_BOTTOM, ScreenWidth, MENU_STRIPE_THICKNESS, MENU_SEPARATOR_COLOR, 1);
+        Rectangle(0, HOME_BOTTOM_BAR_TOP, ScreenWidth, HOME_BOTTOM_BAR_HEIGHT, MENU_BAR_COLOR, 1);
 
-        GRRLIB_PrintfTTF(500, 40, DefaultFont,
+        GRRLIB_PrintfTTF(MENU_VERSION_LEFT, MENU_VERSION_TOP, DefaultFont,
             std::format(std::runtime_format(Lang->String("Ver. {}")), "1.1.0").c_str(),
-            12, 0xFFFFFFFF);
+            MENU_VERSION_FONT_SIZE, 0xFFFFFFFF);
 
         if(CopyScreen)
         {
@@ -788,7 +786,7 @@ void Game::PrintWrapText(u16 x, u16 y, u16 maxLineWidth,
     auto lastSpace = tmp.begin();
     int ypos = y;
     int z = 0;
-    const int stepSize = static_cast<int>(fontSize * 1.2);
+    const int stepSize = static_cast<int>(fontSize * LINE_HEIGHT_MULTIPLIER);
 
     for(auto i = tmp.begin(); i != tmp.end(); ++i)
     {
