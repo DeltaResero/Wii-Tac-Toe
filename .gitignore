@@ -44,6 +44,13 @@ _CPack_Packages/
 # ===================================================================
 # IDE / Editor configuration
 # ===================================================================
+# Clangd / Language Server Protocol caching
+.cache/
+# Eclipse (C/C++ Development Tooling - CDT)
+.project
+.cproject
+.settings/
+.metadata/
 # Visual Studio Code
 .vscode/
 # JetBrains IDEs (CLion, etc.)
@@ -62,6 +69,12 @@ _CPack_Packages/
 Thumbs.db
 
 # ===================================================================
+# Wii Homebrew / DevkitPro Specifics
+# ===================================================================
+# Useful for debugging stack dumps but shouldn't be committed
+*.map
+
+# ===================================================================
 # Miscellaneous temporary files
 # ===================================================================
 # Backup and patch files created by editors and tools
@@ -72,4 +85,3 @@ Thumbs.db
 *.orig
 *.patch
 *.rej
-
