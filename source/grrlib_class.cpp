@@ -642,7 +642,7 @@ u16 Screen::GetHeight()
  */
 void FX::FlipH(const Texture *texsrc, Texture *texdest)
 {
-    GRRLIB_BMFX_FlipH(reinterpret_cast<const GRRLIB_texImg *>(texsrc), reinterpret_cast<GRRLIB_texImg *>(texdest));
+    GRRLIB_BMFX_FlipH(texsrc->AsGRRLIB(), texdest->AsGRRLIB());
 }
 /**
  * Flip texture vertical.
@@ -652,7 +652,7 @@ void FX::FlipH(const Texture *texsrc, Texture *texdest)
  */
 void FX::FlipV(const Texture *texsrc, Texture *texdest)
 {
-    GRRLIB_BMFX_FlipV(reinterpret_cast<const GRRLIB_texImg *>(texsrc), reinterpret_cast<GRRLIB_texImg *>(texdest));
+    GRRLIB_BMFX_FlipV(texsrc->AsGRRLIB(), texdest->AsGRRLIB());
 }
 /**
  * Change a texture to gray scale.
@@ -662,7 +662,7 @@ void FX::FlipV(const Texture *texsrc, Texture *texdest)
  */
 void FX::Grayscale(const Texture *texsrc, Texture *texdest)
 {
-    GRRLIB_BMFX_Grayscale(reinterpret_cast<const GRRLIB_texImg *>(texsrc), reinterpret_cast<GRRLIB_texImg *>(texdest));
+    GRRLIB_BMFX_Grayscale(texsrc->AsGRRLIB(), texdest->AsGRRLIB());
 }
 /**
  * Change a texture to sepia (old photo style).
@@ -672,7 +672,7 @@ void FX::Grayscale(const Texture *texsrc, Texture *texdest)
  */
 void FX::Sepia(const Texture *texsrc, Texture *texdest)
 {
-    GRRLIB_BMFX_Sepia(reinterpret_cast<const GRRLIB_texImg *>(texsrc), reinterpret_cast<GRRLIB_texImg *>(texdest));
+    GRRLIB_BMFX_Sepia(texsrc->AsGRRLIB(), texdest->AsGRRLIB());
 }
 /**
  * Invert colors of the texture.
@@ -682,7 +682,7 @@ void FX::Sepia(const Texture *texsrc, Texture *texdest)
  */
 void FX::Invert(const Texture *texsrc, Texture *texdest)
 {
-    GRRLIB_BMFX_Invert(reinterpret_cast<const GRRLIB_texImg *>(texsrc), reinterpret_cast<GRRLIB_texImg *>(texdest));
+    GRRLIB_BMFX_Invert(texsrc->AsGRRLIB(), texdest->AsGRRLIB());
 }
 /**
  * A texture effect (Blur).
@@ -693,7 +693,7 @@ void FX::Invert(const Texture *texsrc, Texture *texdest)
  */
 void FX::Blur(const Texture *texsrc, Texture *texdest, const u32 factor)
 {
-    GRRLIB_BMFX_Blur(reinterpret_cast<const GRRLIB_texImg *>(texsrc), reinterpret_cast<GRRLIB_texImg *>(texdest), factor);
+    GRRLIB_BMFX_Blur(texsrc->AsGRRLIB(), texdest->AsGRRLIB(), factor);
 }
 /**
  * A texture effect (Scatter).
@@ -704,7 +704,7 @@ void FX::Blur(const Texture *texsrc, Texture *texdest, const u32 factor)
  */
 void FX::Scatter(const Texture *texsrc, Texture *texdest, const u32 factor)
 {
-    GRRLIB_BMFX_Scatter(reinterpret_cast<const GRRLIB_texImg *>(texsrc), reinterpret_cast<GRRLIB_texImg *>(texdest), factor);
+    GRRLIB_BMFX_Scatter(texsrc->AsGRRLIB(), texdest->AsGRRLIB(), factor);
 }
 /**
  * A texture effect (Pixelate).
@@ -715,7 +715,7 @@ void FX::Scatter(const Texture *texsrc, Texture *texdest, const u32 factor)
  */
 void FX::Pixelate(const Texture *texsrc, Texture *texdest, const u32 factor)
 {
-    GRRLIB_BMFX_Pixelate(reinterpret_cast<const GRRLIB_texImg *>(texsrc), reinterpret_cast<GRRLIB_texImg *>(texdest), factor);
+    GRRLIB_BMFX_Pixelate(texsrc->AsGRRLIB(), texdest->AsGRRLIB(), factor);
 }
 
 // EOF

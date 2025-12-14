@@ -26,7 +26,7 @@ Cursor::Cursor() : Object(),
     Height = 96;
 
     // Load textures
-    GRRLIB_InitTileSet(reinterpret_cast<GRRLIB_texImg *>(Cursors.get()), Width, Height, 0);
+    GRRLIB_InitTileSet(Cursors->AsGRRLIB(), Width, Height, 0);
 
     // Set hotspot
     Cursors->SetOffset(48, 45);

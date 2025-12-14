@@ -71,6 +71,18 @@ public:
     [[nodiscard]] u8 GetAlpha();
 
     [[nodiscard]] static std::unique_ptr<Texture> CreateFromPNG(const u8 *Buffer);
+
+    // Safe conversion helpers
+    [[nodiscard]] GRRLIB_texImg* AsGRRLIB() noexcept
+    {
+        return static_cast<GRRLIB_texImg*>(this);
+    }
+
+    [[nodiscard]] const GRRLIB_texImg* AsGRRLIB() const noexcept
+    {
+        return static_cast<const GRRLIB_texImg*>(this);
+    }
+
 private:
     void Assign(GRRLIB_texImg *other);
     u32 _Color;  /**< The color used to draw the texture. By default it is set to 0xFFFFFFFF. */

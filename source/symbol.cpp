@@ -24,7 +24,7 @@ Symbol::Symbol() :
     Width = 136;
     Height = 100;
 
-    GRRLIB_InitTileSet(reinterpret_cast<GRRLIB_texImg *>(Img.get()), Width, Height, 0);
+    GRRLIB_InitTileSet(Img->AsGRRLIB(), Width, Height, 0);
 }
 
 /**
