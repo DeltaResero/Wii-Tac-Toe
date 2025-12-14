@@ -168,16 +168,13 @@ private:
     static constexpr u32 CREDITS_TEXT_COLOR = 0xFFFFFFFF;
 
     // FPS display
-    static constexpr f32 FPS_LEFT = 15.0f;
-    static constexpr f32 FPS_TOP = 445.0f;
-    static constexpr f32 FPS_SHADOW_X_1 = 14.0f;
-    static constexpr f32 FPS_SHADOW_Y_1 = 444.0f;
-    static constexpr f32 FPS_SHADOW_X_2 = 16.0f;
-    static constexpr f32 FPS_SHADOW_Y_2 = 446.0f;
+    static constexpr f32 FPS_LEFT_MARGIN = 15.0f;
+    static constexpr f32 FPS_BOTTOM_MARGIN = 455.0f;
+    static constexpr f32 FPS_SHADOW_OFFSET = 1.0f;
     static constexpr u32 FPS_FONT_SIZE = 17;
-    static constexpr u32 FPS_SHADOW_COLOR_1 = 0x000000FF;
-    static constexpr u32 FPS_TEXT_COLOR = 0xFFFFFFFF;
-    static constexpr u32 FPS_SHADOW_COLOR_2 = 0x808080FF;
+    static constexpr u32 FPS_SHADOW_COLOR_1 = 0x000000FF; // Black
+    static constexpr u32 FPS_TEXT_COLOR = 0xFFFFFFFF;     // White (Highlight)
+    static constexpr u32 FPS_SHADOW_COLOR_2 = 0x808080FF; // Gray
 
     // Text wrapping
     static constexpr f32 LINE_HEIGHT_MULTIPLIER = 1.2f;

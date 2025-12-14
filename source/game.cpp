@@ -245,11 +245,14 @@ void Game::Paint()
     {
         CalculateFrameRate();
         const auto strFPS = std::format("FPS: {}", FPS);
-        // Draw shadows first (background layers)
-        GRRLIB_PrintfTTF(FPS_SHADOW_X_2, FPS_SHADOW_Y_2, DefaultFont, strFPS.c_str(), FPS_FONT_SIZE, FPS_SHADOW_COLOR_2);
-        GRRLIB_PrintfTTF(FPS_LEFT, FPS_TOP, DefaultFont, strFPS.c_str(), FPS_FONT_SIZE, FPS_SHADOW_COLOR_1);
-        // Draw main text last (foreground layer)
-        GRRLIB_PrintfTTF(FPS_SHADOW_X_1, FPS_SHADOW_Y_1, DefaultFont, strFPS.c_str(), FPS_FONT_SIZE, FPS_TEXT_COLOR);
+
+        // Draw shadows first, then the main text highlight on top
+        // Gray sub-shadow
+        GRRLIB_PrintfTTF(FPS_LEFT_MARGIN + FPS_SHADOW_OFFSET, FPS_BOTTOM_MARGIN + FPS_SHADOW_OFFSET, DefaultFont, strFPS.c_str(), FPS_FONT_SIZE, FPS_SHADOW_COLOR_2);
+        // Black main shadow
+        GRRLIB_PrintfTTF(FPS_LEFT_MARGIN, FPS_BOTTOM_MARGIN, DefaultFont, strFPS.c_str(), FPS_FONT_SIZE, FPS_SHADOW_COLOR_1);
+        // White highlight text
+        GRRLIB_PrintfTTF(FPS_LEFT_MARGIN - FPS_SHADOW_OFFSET, FPS_BOTTOM_MARGIN - FPS_SHADOW_OFFSET, DefaultFont, strFPS.c_str(), FPS_FONT_SIZE, FPS_TEXT_COLOR);
     }
 }
 
