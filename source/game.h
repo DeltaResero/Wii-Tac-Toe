@@ -185,7 +185,7 @@ private:
     void Clear();
     void TurnIsOver();
     void NewGame();
-    void PrintWrapText(u16 x, u16 y, u16 maxLineWidth, const std::string &input,
+    void PrintWrapText(u16 x, u16 y, u16 maxLineWidth, std::string_view input,
         u32 fontSize, u32 TextColor, u32 ShadowColor, s8 OffsetX, s8 OffsetY);
     void ChangeScreen(gameScreen NewScreen, bool PlaySound = true);
     void ButtonOn(s8 NewFocusedButton);

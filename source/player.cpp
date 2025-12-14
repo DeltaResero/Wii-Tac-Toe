@@ -15,7 +15,7 @@
  * Set the player name.
  * @param[in] AName Give a name to the player.
  */
-void Player::SetName(const std::string &AName)
+void Player::SetName(std::string_view AName)
 {
     Name = AName;
 }

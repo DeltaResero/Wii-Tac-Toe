@@ -84,7 +84,7 @@ void Button::SetTextHeight(unsigned int NewHeight)
  * Set caption on the button.
  * @param[in] NewCaption Text to put on the button.
  */
-void Button::SetCaption(const std::string &NewCaption)
+void Button::SetCaption(std::string_view NewCaption)
 {
     Caption = NewCaption;
     TextWidth = GRRLIB_WidthTTF(Font, Caption.c_str(), TextHeight);

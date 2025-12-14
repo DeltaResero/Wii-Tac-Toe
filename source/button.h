@@ -39,7 +39,7 @@ public:
     ~Button() = default;
     Button& operator=(Button const&) = delete;
     void Paint() override;
-    void SetCaption(const std::string &NewCaption);
+    void SetCaption(std::string_view NewCaption);
     void SetFont(GRRLIB_ttfFont *AFont);
     void SetFocused(bool IsFocused);
     void SetSelected(bool IsSelected);

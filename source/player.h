@@ -39,7 +39,7 @@ public:
     ~Player() = default;
     Player& operator=(Player const&) = delete;
 
-    void SetName(const std::string &AName);
+    void SetName(std::string_view AName);
     [[nodiscard]] std::string GetName() const;
 
     void SetSign(u8 ASign);

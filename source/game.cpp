@@ -784,10 +784,11 @@ void Game::NewGame()
  * @param[in] OffsetY Shadow offset for the y-coordinate.
  */
 void Game::PrintWrapText(u16 x, u16 y, u16 maxLineWidth,
-    const std::string &input, u32 fontSize, u32 TextColor,
+    std::string_view input, u32 fontSize, u32 TextColor,
     u32 ShadowColor, s8 OffsetX, s8 OffsetY)
 {
-    std::string tmp = input + " "; // Make local copy
+    std::string tmp(input);
+    tmp += " "; // Make local copy
     auto startIndex = tmp.begin();
     auto lastSpace = tmp.begin();
     int ypos = y;

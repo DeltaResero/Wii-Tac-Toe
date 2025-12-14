@@ -49,7 +49,7 @@ Texture::Texture(const char *filename) : Texture()
  * @param filename The JPEG, PNG or Bitmap file to load.
  * @see Load(const std::string &)
  */
-Texture::Texture(const std::string &filename) : Texture()
+Texture::Texture(std::string_view filename) : Texture()
 {
     Load(filename);
 }
@@ -174,9 +174,9 @@ void Texture::Load(const char *filename)
  * Load a texture from a file.
  * @param filename The JPEG, PNG or Bitmap file to load.
  */
-void Texture::Load(const std::string &filename)
+void Texture::Load(std::string_view filename)
 {
-    Load(filename.c_str());
+    Load(std::string(filename).c_str());
 }
 
 /**
@@ -609,9 +609,9 @@ bool Screen::ScreenShot(const char* filename)
  * @param filename Name of the file to write.
  * @return bool true=everything worked, false=problems occurred.
  */
-bool Screen::ScreenShot(const std::string &filename)
+bool Screen::ScreenShot(std::string_view filename)
 {
-    return GRRLIB_ScrShot(filename.c_str());
+    return GRRLIB_ScrShot(std::string(filename).c_str());
 }
 
 /**

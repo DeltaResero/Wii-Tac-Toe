@@ -34,7 +34,7 @@ public:
     Texture();
     Texture(const u8 *Buffer, const u32 Size = 0);
     Texture(const char *filename);
-    Texture(const std::string &filename);
+    Texture(std::string_view filename);
     Texture(const u32 w, const u32 h);
     ~Texture();
 
@@ -54,7 +54,7 @@ public:
     void Refresh();
     void Load(const u8 *Buffer, const u32 Size = 0);
     void Load(const char *filename);
-    void Load(const std::string &filename);
+    void Load(std::string_view filename);
     void Create(const u32 w, const u32 h, const u32 Color = 0x00000000);
     void Draw(const f32 xpos, const f32 ypos, const f32 degrees,
               const f32 scaleX, const f32 scaleY, const u32 color);
@@ -101,7 +101,7 @@ namespace Screen
     [[nodiscard]] u16 GetHeight();
 
     bool ScreenShot(const char* filename);
-    bool ScreenShot(const std::string &filename);
+    bool ScreenShot(std::string_view filename);
 }   /* namespace Screen */
 using namespace Screen;
 
