@@ -789,46 +789,53 @@ void Game::PrintWrapText(u16 x, u16 y, u16 maxLineWidth,
     std::string_view input, u32 fontSize, u32 TextColor,
     u32 ShadowColor, s8 OffsetX, s8 OffsetY)
 {
-    std::string tmp(input);
-    tmp += " "; // Make local copy
-    auto startIndex = tmp.begin();
-    auto lastSpace = tmp.begin();
-    int ypos = y;
-    int z = 0;
     const int stepSize = static_cast<int>(fontSize * LINE_HEIGHT_MULTIPLIER);
+    int ypos = y;
 
-    for(auto i = tmp.begin(); i != tmp.end(); ++i)
+    size_t lineStart = 0;
+    size_t lastSpace = 0;
+
+    // Add space to handle word boundary at end
+    std::string text(input);
+    text += ' ';
+
+    for (size_t i = 0; i < text.length(); ++i)
     {
-        if(*i == ' ')
+        if (text[i] == ' ')
         {
-            const std::string tmp2(startIndex, i);
-            z = GRRLIB_WidthTTF(DefaultFont, tmp2.c_str(), fontSize);
+            std::string_view word(text.data() + lineStart, i - lineStart);
+            const int wordWidth = GRRLIB_WidthTTF(DefaultFont, std::string(word).c_str(), fontSize);
 
-            if(z >= maxLineWidth)
+            if (wordWidth >= maxLineWidth && lineStart < i)
             {
-                *lastSpace = 0;
-                const int textLeft = x + (maxLineWidth / 2) -
-                    (GRRLIB_WidthTTF(DefaultFont, &(*startIndex), fontSize) / 2);
-                GRRLIB_PrintfTTF(textLeft + OffsetX, ypos + OffsetY, DefaultFont, &(*startIndex),
+                // Line is too wide, print accumulated text
+                text[lastSpace] = '\0';
+                const char* lineText = text.c_str() + lineStart;
+                const int textWidth = GRRLIB_WidthTTF(DefaultFont, lineText, fontSize);
+                const int textLeft = x + (maxLineWidth - textWidth) / 2;
+
+                // Draw shadow then text
+                GRRLIB_PrintfTTF(textLeft + OffsetX, ypos + OffsetY, DefaultFont, lineText,
                     fontSize, ShadowColor);
-                GRRLIB_PrintfTTF(textLeft, ypos, DefaultFont, &(*startIndex),
-                    fontSize, TextColor);
-                startIndex = lastSpace + 1;
+                GRRLIB_PrintfTTF(textLeft, ypos, DefaultFont, lineText, fontSize, TextColor);
+
+                lineStart = lastSpace + 1;
                 ypos += stepSize;
-                z = 0;
             }
             lastSpace = i;
         }
     }
 
-    if(z <= maxLineWidth)
+    // Print remaining text
+    if (lineStart < text.length())
     {
-        const int textLeft = x + (maxLineWidth / 2) -
-            (GRRLIB_WidthTTF(DefaultFont, &(*startIndex), fontSize) / 2);
-        GRRLIB_PrintfTTF(textLeft + OffsetX, ypos + OffsetY, DefaultFont, &(*startIndex),
+        const char* lineText = text.c_str() + lineStart;
+        const int textWidth = GRRLIB_WidthTTF(DefaultFont, lineText, fontSize);
+        const int textLeft = x + (maxLineWidth - textWidth) / 2;
+
+        GRRLIB_PrintfTTF(textLeft + OffsetX, ypos + OffsetY, DefaultFont, lineText,
             fontSize, ShadowColor);
-        GRRLIB_PrintfTTF(textLeft, ypos, DefaultFont, &(*startIndex),
-            fontSize, TextColor);
+        GRRLIB_PrintfTTF(textLeft, ypos, DefaultFont, lineText, fontSize, TextColor);
     }
 }
 
